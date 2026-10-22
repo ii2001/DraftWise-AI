@@ -1,0 +1,7 @@
+Started (Asia/Seoul): 2026-10-22T10:17:33.966526+09:00
+Command: /Users/kim-yechan/workspace/draftwise-ai/.venv/bin/python -m pytest -q
+Exit code: 0
+Wall seconds: 0.686531
+
+....................                                                     [100%]
+20 passed in 0.26s

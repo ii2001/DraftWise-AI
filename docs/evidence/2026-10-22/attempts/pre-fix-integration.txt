@@ -1,0 +1,4 @@
+AD 편중 / AP 정글 요청 {'llm_mode': 'openai', 'graph_mode': 'langgraph', 'mcp_mode': 'mcp_stdio', 'latency_ms': 4158} http_wall_ms= 4160.824 passed= True
+앞라인 부재 {'llm_mode': 'openai', 'graph_mode': 'langgraph', 'mcp_mode': 'mcp_stdio', 'latency_ms': 2321} http_wall_ms= 2326.796 passed= True
+AP 편중 / AD 정글 요청 {'llm_mode': 'openai', 'graph_mode': 'langgraph', 'mcp_mode': 'mcp_stdio', 'latency_ms': 2803} http_wall_ms= 2809.549 passed= True
+밴 제한 {'llm_mode': 'openai', 'graph_mode': 'langgraph', 'mcp_mode': 'mcp_stdio', 'latency_ms': 2560} http_wall_ms= 2566.368 passed= True

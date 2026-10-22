@@ -1,0 +1,19 @@
+{
+  "reviewed_at": "2026-10-22T10:28:12.854912+09:00",
+  "scope": "manual check of confirmed-ban assertions only; no general factual-accuracy or win-rate claim",
+  "reviewed_real_outputs": 5,
+  "incorrect_confirmed_ban_claims": 1,
+  "affected_case": "integration case 4: 밴 제한",
+  "actual_confirmed_bans": [
+    "Zyra",
+    "Ekko"
+  ],
+  "incorrect_quote": "밴된 자크를 제외하고는",
+  "fact": "Zac is not banned; deterministic top recommendation remains Zac",
+  "status": "unresolved limitation; prompt context fix does not guarantee factual narration",
+  "other_reviewed_outputs": [
+    "integration cases 1, 2, 3",
+    "browser UI output"
+  ],
+  "pre_fix_review": "attempts/pre-fix-review.json"
+}

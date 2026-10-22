@@ -1,0 +1,47 @@
+{
+  "tested_app_commit": "78f4cdd3dd133591c1040650d88d16250eb4c31b",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.13",
+  "node": "v26.5.0",
+  "packages": {
+    "fastapi": "0.159.1",
+    "uvicorn": "0.54.0",
+    "pydantic": "2.14.1",
+    "httpx": "0.28.1",
+    "openai": "2.54.0",
+    "langgraph": "1.2.16",
+    "mcp": "1.30.0",
+    "pytest": "9.1.1"
+  },
+  "runs": [
+    {
+      "name": "python-tests",
+      "command": [
+        "/Users/kim-yechan/workspace/draftwise-ai/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "started_at": "2026-10-22T10:17:33.966526+09:00",
+      "exit_code": 0,
+      "wall_seconds": 0.6865309580171015,
+      "log": "python-tests.txt"
+    },
+    {
+      "name": "node-tests",
+      "command": [
+        "node",
+        "--test",
+        "tests/test_draft_ui.cjs"
+      ],
+      "started_at": "2026-10-22T10:17:34.653447+09:00",
+      "exit_code": 0,
+      "wall_seconds": 0.13960341701749712,
+      "log": "node-tests.txt"
+    }
+  ],
+  "counts": {
+    "python": 20,
+    "node": 8
+  }
+}

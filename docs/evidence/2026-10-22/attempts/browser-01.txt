@@ -1,0 +1,14 @@
+PASS: initial desktop render: 173 champions, local Vue mounted
+PASS: role and separate MID/JUNGLE favorites persist across reload
+PASS: preset and reset preserve personal role
+PASS: Korean champion search and position filter
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: '야스오', exact: true })[22m
+
+    at /Users/kim-yechan/workspace/draftwise-ai/scripts/browser_submission.cjs:68:58 {
+  log: [
+    "  - waiting for getByRole('button', { name: '야스오', exact: true })"
+  ],
+  name: 'TimeoutError'
+}

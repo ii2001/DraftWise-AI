@@ -1,0 +1,11 @@
+{
+  "scope": "manual check of confirmed-ban claims only; not a full semantic accuracy score",
+  "reviewed_real_outputs": 5,
+  "incorrect_gragas_ban_claims": 4,
+  "affected": [
+    "integration cases 1, 2, 4",
+    "browser UI output"
+  ],
+  "evidence": "pre-fix-integration.json, pre-fix-browser.json, pre-fix-ai-analysis.png",
+  "root_cause": "actual request bans omitted from LLM payload; analysis.bans contains suggested bans and is ambiguous to model"
+}

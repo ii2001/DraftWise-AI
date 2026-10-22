@@ -1,0 +1,321 @@
+{
+  "started_at": "2026-10-22T01:22:31.218Z",
+  "base_url": "http://127.0.0.1:8602",
+  "mocked_analysis": false,
+  "checks": [
+    {
+      "name": "initial desktop render: 173 champions, local Vue mounted",
+      "passed": true
+    },
+    {
+      "name": "role and separate MID/JUNGLE favorites persist across reload",
+      "passed": true
+    },
+    {
+      "name": "preset and reset preserve personal role",
+      "passed": true
+    },
+    {
+      "name": "Korean champion search and position filter",
+      "passed": true
+    },
+    {
+      "name": "team slots, duplicate prevention, arbitrary ban slot and removal",
+      "passed": true
+    },
+    {
+      "name": "real UI analyze button: OpenAI + LangGraph + MCP, position evaluation and coach explanation",
+      "passed": true
+    },
+    {
+      "name": "selected-pick composition preview has six metrics and makes no extra model call",
+      "passed": true
+    },
+    {
+      "name": "saved analysis/settings restore; changed inputs invalidate results; no extra model call",
+      "passed": true
+    },
+    {
+      "name": "real API rejects conflicting pick/ban with HTTP 422 before model execution",
+      "passed": true
+    },
+    {
+      "name": "responsive widths 320–1440px without horizontal overflow; mobile screenshot 390x844",
+      "passed": true
+    },
+    {
+      "name": "browser external assets blocked: local Vue and champion catalog still render; this is not an offline OpenAI test",
+      "passed": true
+    },
+    {
+      "name": "fault injection: blocked app script shows recovery screen instead of blank page",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "screenshots/01-draft-desktop.png",
+    "screenshots/02-role-and-pool.png",
+    "screenshots/03-picks-and-bans.png",
+    "screenshots/04-real-ai-analysis.png",
+    "screenshots/05-composition-comparison.png",
+    "screenshots/06-history.png",
+    "screenshots/07-mobile.png",
+    "screenshots/08-external-assets-blocked.png",
+    "screenshots/09-boot-recovery.png"
+  ],
+  "page_errors": [],
+  "real_ui_analysis_calls": 1,
+  "browser": "155.0.8059.86",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "ui_analysis": {
+    "request": {
+      "allies": [
+        "Yasuo",
+        "Jinx"
+      ],
+      "enemies": [],
+      "bans": [],
+      "pool": [
+        "Zac",
+        "Zyra",
+        "Ekko"
+      ],
+      "slots": {
+        "allies": [
+          null,
+          "Yasuo",
+          "Jinx"
+        ],
+        "enemies": [],
+        "bans": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "role": "JUNGLE",
+      "style": "balanced",
+      "pool_only": false,
+      "question": "",
+      "session_id": "5af0fac3-b77d-401f-94ea-51cd01033a6d"
+    },
+    "http_status": 200,
+    "browser_wall_ms": 3362.999917,
+    "response": {
+      "recommendations": [
+        {
+          "id": "Zac",
+          "name": "자크",
+          "role": "JUNGLE",
+          "damage": "AP",
+          "score": 86.8,
+          "breakdown": {
+            "comfort": 95,
+            "team": 97,
+            "enemy": 50,
+            "position": 85
+          },
+          "reasons": [
+            "직접 등록한 숙련 챔피언",
+            "정글: 먼저 진입해 교전 개시",
+            "정글: CC를 활용한 갱킹 연계",
+            "AD 편중을 보완하는 AP 피해"
+          ],
+          "composition_after": {
+            "ad": 2,
+            "ap": 1,
+            "frontline": 1,
+            "hard_cc": 1,
+            "engage": 1,
+            "peel": 1,
+            "flags": [
+              "뚜렷한 조합 결함 없음 또는 입력 부족"
+            ]
+          }
+        },
+        {
+          "id": "Ekko",
+          "name": "에코",
+          "role": "JUNGLE",
+          "damage": "AP",
+          "score": 83.3,
+          "breakdown": {
+            "comfort": 95,
+            "team": 88,
+            "enemy": 50,
+            "position": 85
+          },
+          "reasons": [
+            "직접 등록한 숙련 챔피언",
+            "정글: 먼저 진입해 교전 개시",
+            "정글: CC를 활용한 갱킹 연계",
+            "AD 편중을 보완하는 AP 피해"
+          ],
+          "composition_after": {
+            "ad": 2,
+            "ap": 1,
+            "frontline": 0,
+            "hard_cc": 1,
+            "engage": 1,
+            "peel": 0,
+            "flags": [
+              "아군 앞라인 부족"
+            ]
+          }
+        },
+        {
+          "id": "Zyra",
+          "name": "자이라",
+          "role": "JUNGLE",
+          "damage": "AP",
+          "score": 78.5,
+          "breakdown": {
+            "comfort": 95,
+            "team": 76,
+            "enemy": 50,
+            "position": 65
+          },
+          "reasons": [
+            "직접 등록한 숙련 챔피언",
+            "정글: CC를 활용한 갱킹 연계",
+            "AD 편중을 보완하는 AP 피해",
+            "군중 제어기 보강"
+          ],
+          "composition_after": {
+            "ad": 2,
+            "ap": 1,
+            "frontline": 0,
+            "hard_cc": 1,
+            "engage": 0,
+            "peel": 1,
+            "flags": [
+              "아군 앞라인 부족"
+            ]
+          }
+        },
+        {
+          "id": "Gragas",
+          "name": "그라가스",
+          "role": "JUNGLE",
+          "damage": "AP",
+          "score": 68.8,
+          "breakdown": {
+            "comfort": 50,
+            "team": 97,
+            "enemy": 50,
+            "position": 85
+          },
+          "reasons": [
+            "정글: 먼저 진입해 교전 개시",
+            "정글: CC를 활용한 갱킹 연계",
+            "AD 편중을 보완하는 AP 피해",
+            "부족한 앞라인 보완"
+          ],
+          "composition_after": {
+            "ad": 2,
+            "ap": 1,
+            "frontline": 1,
+            "hard_cc": 1,
+            "engage": 1,
+            "peel": 1,
+            "flags": [
+              "뚜렷한 조합 결함 없음 또는 입력 부족"
+            ]
+          }
+        },
+        {
+          "id": "Nautilus",
+          "name": "노틸러스",
+          "role": "JUNGLE",
+          "damage": "AP",
+          "score": 68.8,
+          "breakdown": {
+            "comfort": 50,
+            "team": 97,
+            "enemy": 50,
+            "position": 85
+          },
+          "reasons": [
+            "정글: 먼저 진입해 교전 개시",
+            "정글: CC를 활용한 갱킹 연계",
+            "AD 편중을 보완하는 AP 피해",
+            "부족한 앞라인 보완"
+          ],
+          "composition_after": {
+            "ad": 2,
+            "ap": 1,
+            "frontline": 1,
+            "hard_cc": 1,
+            "engage": 1,
+            "peel": 0,
+            "flags": [
+              "뚜렷한 조합 결함 없음 또는 입력 부족"
+            ]
+          }
+        }
+      ],
+      "bans": [
+        {
+          "id": "Gragas",
+          "name": "그라가스",
+          "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+        },
+        {
+          "id": "Hecarim",
+          "name": "헤카림",
+          "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+        },
+        {
+          "id": "MonkeyKing",
+          "name": "오공",
+          "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+        }
+      ],
+      "team": {
+        "ad": 2,
+        "ap": 0,
+        "frontline": 0,
+        "hard_cc": 0,
+        "engage": 0,
+        "peel": 0,
+        "flags": [
+          "아군 물리 피해 편중",
+          "아군 앞라인 부족",
+          "아군 CC 부족"
+        ]
+      },
+      "role_focus": "정글 · 진입과 CC를 통한 교전 개시",
+      "weights": {
+        "comfort": 0.4,
+        "team": 0.4,
+        "enemy": 0.2
+      },
+      "considered": 57,
+      "data_quality": "curated_demo",
+      "explanation": "현재 아군 조합인 야스오(AD 딜러)와 징크스(AD 원거리 딜러)는 물리 피해가 편중되어 있고 앞라인 및 군중 제어가 부족한 상태입니다. \n\n자크(점수 86.8)는 뛰어난 앞라인 역할과 강력한 군중 제어, 진입 능력을 갖추고 있어 아군의 앞라인 부족을 효과적으로 보완하며, AP 피해로 물리 피해 편중을 완화할 수 있어 매우 균형 잡힌 선택입니다. 에코(점수 83.3)도 진입과 CC 모두 가능하지만 앞라인 역할이 부족해 다소 불안요소가 있습니다. 자이라(점수 78.5)는 CC와 견제에 강점이 있지만 진입력과 앞라인 능력은 낮아 앞쪽에서 전투를 이끌기에는 어려움이 있습니다. \n\n그라가스와 노틸러스는 아군 조합 보완 측면에서 괜찮지만, 그라가스는 밴 처리되어 선택할 수 없고 노틸러스는 보호 능력이 상대적으로 부족합니다. 따라서 아군 조합과 팀 전략을 고려하면 자크가 가장 적합한 정글 픽입니다.",
+      "trace": [
+        "validate_input",
+        "mcp_retrieve",
+        "rule_scoring",
+        "llm_explanation"
+      ],
+      "llm_mode": "openai",
+      "mcp_mode": "mcp_stdio",
+      "graph_mode": "langgraph",
+      "latency_ms": 3289,
+      "session_id": "5af0fac3-b77d-401f-94ea-51cd01033a6d"
+    }
+  },
+  "passed": true,
+  "finished_at": "2026-10-22T01:22:41.822Z"
+}

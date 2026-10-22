@@ -1,0 +1,12 @@
+PASS: initial desktop render: 173 champions, local Vue mounted
+PASS: role and separate MID/JUNGLE favorites persist across reload
+PASS: preset and reset preserve personal role
+PASS: Korean champion search and position filter
+PASS: team slots, duplicate prevention, arbitrary ban slot and removal
+PASS: real UI analyze button: OpenAI + LangGraph + MCP, position evaluation and coach explanation
+PASS: selected-pick composition preview has six metrics and makes no extra model call
+PASS: saved analysis/settings restore; changed inputs invalidate results; no extra model call
+PASS: real API rejects conflicting pick/ban with HTTP 422 before model execution
+PASS: responsive widths 320–1440px without horizontal overflow; mobile screenshot 390x844
+PASS: browser external assets blocked: local Vue and champion catalog still render; this is not an offline OpenAI test
+PASS: fault injection: blocked app script shows recovery screen instead of blank page

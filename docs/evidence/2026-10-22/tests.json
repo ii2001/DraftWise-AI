@@ -1,0 +1,54 @@
+{
+  "tested_app_commit": "78f4cdd3dd133591c1040650d88d16250eb4c31b",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.13",
+  "node": "v26.5.0",
+  "packages": {
+    "fastapi": "0.159.1",
+    "uvicorn": "0.54.0",
+    "pydantic": "2.14.1",
+    "httpx": "0.28.1",
+    "openai": "2.54.0",
+    "langgraph": "1.2.16",
+    "mcp": "1.30.0",
+    "pytest": "9.1.1"
+  },
+  "runs": [
+    {
+      "name": "python-tests",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "started_at": "2026-10-22T10:26:09.952407+09:00",
+      "exit_code": 0,
+      "wall_seconds": 0.5301886669767555,
+      "log": "python-tests.txt"
+    },
+    {
+      "name": "node-tests",
+      "command": [
+        "node",
+        "--test",
+        "tests/test_draft_ui.cjs"
+      ],
+      "started_at": "2026-10-22T10:26:10.482949+09:00",
+      "exit_code": 0,
+      "wall_seconds": 0.13280116699752398,
+      "log": "node-tests.txt"
+    }
+  ],
+  "counts": {
+    "python": 20,
+    "node": 8
+  },
+  "source_hashes": {
+    "app/llm.py": "2b882275465bb1c7f060a4a7af4db900ef78c026fc5a49e3e527ef011ddf13b7",
+    "app/scoring.py": "dc287645c9e22cf30310bf88196214e56bd1b0ab47166301ad230441aec4fee5",
+    "app/main.py": "389162573ea8e0ff7e5cd752e171b532594878c34eb5a92e74e8bc38bd0d9bf3",
+    "static/app.js": "e513385b9117037abb15389ab9e64dbfa296bfb2d44a9e40f6f89b84b40457e2",
+    "static/index.html": "e6e2439c774217eb9e3b4197e42e600d0e3e69670cc429ac4f55f895216f892e"
+  }
+}

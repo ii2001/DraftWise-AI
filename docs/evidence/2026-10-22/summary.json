@@ -1,0 +1,21 @@
+{
+  "python_tests": 20,
+  "node_tests": 8,
+  "baseline_success": 3,
+  "improved_success": 4,
+  "benchmark_cases": 4,
+  "kernel_mean_of_case_medians_ms": {
+    "baseline": 0.009276125,
+    "improved": 0.15025525
+  },
+  "final_real_api_cases": 4,
+  "final_real_ui_api_calls": 1,
+  "total_final_real_openai_calls": 5,
+  "pre_fix_real_openai_calls": 5,
+  "total_submission_real_openai_calls": 10,
+  "integration_http_mean_ms": 3050.2213960062363,
+  "browser_checks": 12,
+  "screenshots": 9,
+  "cpu": "Apple M5",
+  "known_final_confirmed_ban_narration_errors": 1
+}

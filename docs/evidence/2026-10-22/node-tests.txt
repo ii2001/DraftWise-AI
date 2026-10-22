@@ -1,0 +1,21 @@
+Started (Asia/Seoul): 2026-10-22T10:26:10.482949+09:00
+Command: node --test tests/test_draft_ui.cjs
+Exit code: 0
+Wall seconds: 0.132801
+
+✔ arbitrary empty slots serialize as champion IDs without empty entries (2.0635ms)
+✔ replacement and removal preserve other slot positions (0.738667ms)
+✔ picked and banned champions cannot be reused, but remain eligible for the pool (0.411792ms)
+✔ team limits and reset retain the four teammate / five opponent model (0.356459ms)
+✔ saved role and personal pool survive reset and example drafts (0.590791ms)
+✔ malformed or unavailable browser storage does not prevent drafting (1.07575ms)
+✔ comparison switches the preview without changing the draft or making requests (0.30475ms)
+✔ history restores slots and settings without replacing personal pool preferences (0.740666ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45.156375

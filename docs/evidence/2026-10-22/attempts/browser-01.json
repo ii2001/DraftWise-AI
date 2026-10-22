@@ -1,0 +1,36 @@
+{
+  "started_at": "2026-10-22T01:20:58.523Z",
+  "base_url": "http://127.0.0.1:8602",
+  "mocked_analysis": false,
+  "checks": [
+    {
+      "name": "initial desktop render: 173 champions, local Vue mounted",
+      "passed": true
+    },
+    {
+      "name": "role and separate MID/JUNGLE favorites persist across reload",
+      "passed": true
+    },
+    {
+      "name": "preset and reset preserve personal role",
+      "passed": true
+    },
+    {
+      "name": "Korean champion search and position filter",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "screenshots/01-draft-desktop.png",
+    "screenshots/02-role-and-pool.png"
+  ],
+  "page_errors": [],
+  "real_ui_analysis_calls": 0,
+  "browser": "155.0.8059.86",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "passed": false,
+  "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '야스오', exact: true })\u001b[22m\n"
+}

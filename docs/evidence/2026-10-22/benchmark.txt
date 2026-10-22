@@ -1,0 +1,14 @@
+AD 편중 / AP 정글 요청 / 픽·밴을 준수하며 AP 피해 보완
+  baseline: 그라가스, success=True, median=0.009229 ms, p95=0.012167 ms
+  improved: 자크, success=True, median=0.148605 ms, p95=0.198458 ms
+앞라인 부재 / 픽·밴을 준수하며 tank >= 2인 앞라인 보완
+  baseline: 그라가스, success=True, median=0.009125 ms, p95=0.011167 ms
+  improved: 자크, success=True, median=0.152625 ms, p95=0.186166 ms
+AP 편중 / AD 정글 요청 / 픽·밴을 준수하며 AD 피해 보완
+  baseline: 그라가스, success=False, median=0.009334 ms, p95=0.012000 ms
+  improved: 바이, success=True, median=0.153500 ms, p95=0.215917 ms
+밴 제한 / 자이라·에코 밴을 준수하며 AP 피해 보완
+  baseline: 그라가스, success=True, median=0.009417 ms, p95=0.011916 ms
+  improved: 자크, success=True, median=0.146292 ms, p95=0.191250 ms
+Success counts / 4: {'baseline': 3, 'improved': 4}
+Timing excludes network, MCP, LangGraph and OpenAI; this is not a win-rate experiment.

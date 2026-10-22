@@ -1,0 +1,7 @@
+Started (Asia/Seoul): 2026-10-22T10:26:09.952407+09:00
+Command: .venv/bin/python -m pytest -q
+Exit code: 0
+Wall seconds: 0.530189
+
+....................                                                     [100%]
+20 passed in 0.19s

@@ -1,0 +1,3 @@
+PASS: confirmed/suggested bans separated, input unchanged; confirmed_bans= []
+PASS: confirmed/suggested bans separated, input unchanged; confirmed_bans= ['Zyra', 'Ekko']
+This is a mocked, offline regression check; it does not prove a real OpenAI call.
