@@ -45,6 +45,7 @@ createApp({
       (filterRole.value==='ALL'||c.roles.includes(filterRole.value)) &&
       (c.name.toLowerCase().includes(query.value.trim().toLowerCase())||c.id.toLowerCase().includes(query.value.trim().toLowerCase()))));
     const name=id=>champMap.value[id]?.name??id;
+    const explanationLabel=mode=>({openai:'AI 근거선택 · 검증 문장',fallback_invalid_explanation:'검증 실패 · 규칙 설명',fallback_legacy_unverified:'이전 설명 보호 · 규칙 설명',fallback_openai_error:'연결 오류 · 규칙 설명',demo_no_api_key:'API 미설정 · 규칙 설명',rules_no_candidates:'후보 없음 · 규칙 설명'}[mode]||'규칙 설명');
     const roleName=id=>roles.find(r=>r.id===id)?.label||id;
     const imageUrl=id=>`https://ddragon.leagueoflegends.com/cdn/${encodeURIComponent(version.value)}/img/champion/${encodeURIComponent(id)}.png`;
     const splashUrl=id=>`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${encodeURIComponent(id)}_0.jpg`;
@@ -172,7 +173,7 @@ createApp({
       finally{catalogLoading.value=false;}
     }
     onMounted(loadCatalog);
-    return {roles,styles,selectionTypes,comparisonMetrics,champions,version,catalogLoading,catalogError,role,activeSide,activeSlot,query,filterRole,draft,style,poolOnly,question,loading,result,selectedPick,storageAvailable,toast,historyOpen,historyLoading,historyError,historyItems,restoredAt,filteredChampions,name,roleName,formatDate,imageUrl,splashUrl,useFallback,allyIndex,isUnavailable,selectSlot,selectSide,pick,remove,resetDraft,loadPreset,selectRecommended,clearComparison,analyze,loadCatalog,toggleHistory,loadHistory,restoreHistory};
+    return {roles,styles,selectionTypes,comparisonMetrics,champions,version,catalogLoading,catalogError,role,activeSide,activeSlot,query,filterRole,draft,style,poolOnly,question,loading,result,selectedPick,storageAvailable,toast,historyOpen,historyLoading,historyError,historyItems,restoredAt,filteredChampions,name,explanationLabel,roleName,formatDate,imageUrl,splashUrl,useFallback,allyIndex,isUnavailable,selectSlot,selectSide,pick,remove,resetDraft,loadPreset,selectRecommended,clearComparison,analyze,loadCatalog,toggleHistory,loadHistory,restoreHistory};
   }
 }).mount('#app');
 document.getElementById('boot-status')?.remove();

@@ -2,7 +2,7 @@
 from typing import Any, TypedDict
 from .mcp_client import fetch_catalog
 from .scoring import DraftRequest,draft_analysis
-from .llm import explain
+from .llm import EXPLANATION_POLICY, explain
 
 class DraftState(TypedDict, total=False):
     request: dict[str,Any]
@@ -51,5 +51,6 @@ async def run_agent(req:DraftRequest) -> dict:
         state=await graph.ainvoke(state)
         state['graph_mode']='langgraph'
     return {**state['analysis'], 'explanation':state['explanation'],
+            'explanation_policy':EXPLANATION_POLICY,
             'trace':state['trace'],'llm_mode':state['llm_mode'],
             'mcp_mode':state['mcp_mode'],'graph_mode':state['graph_mode']}

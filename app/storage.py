@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from uuid import uuid4
 from datetime import datetime,timezone
+from .llm import EXPLANATION_POLICY
+from .scoring import DraftRequest, deterministic_explanation
 DB=Path(os.getenv('DRAFTWISE_DB','data/draftwise.sqlite3'))
 
 def init_db():
@@ -21,4 +23,12 @@ def write(req:dict,result:dict,session_id:str|None) -> str:
 def history(session_id:str) -> list[dict]:
     with sqlite3.connect(DB) as cx:
         rows=cx.execute('SELECT created_at,request,result FROM analyses WHERE session_id = ? ORDER BY created_at DESC LIMIT 10',(session_id,)).fetchall()
-    return [{'created_at':date,'request':json.loads(req),'result':json.loads(res)} for date,req,res in rows]
+    items=[]
+    for date,req,res in rows:
+        request,result=json.loads(req),json.loads(res)
+        if result.get('explanation_policy')!=EXPLANATION_POLICY:
+            result['explanation']=deterministic_explanation(result,DraftRequest.model_validate(request))
+            result['llm_mode']='fallback_legacy_unverified'
+            result['explanation_policy']=EXPLANATION_POLICY
+        items.append({'created_at':date,'request':request,'result':result})
+    return items

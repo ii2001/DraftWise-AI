@@ -1,40 +1,71 @@
-"""OpenAI is called ONLY from the Python backend. No API secret reaches the browser."""
+"""OpenAI selects supplied evidence; only server-owned facts become visible prose."""
 import json
 import os
 from .scoring import DraftRequest, deterministic_explanation
 
-PROMPT = '''너는 리그 오브 레전드 밴픽 의사결정을 돕는 한국어 코치다.
-아래 자료는 실시간 승률·카운터 정보가 아니라 직접 정의한 교육용 특성 데이터이며,
-점수는 결정론적 조합 휴리스틱이다. 근거 없는 티어, 승률, 패치 수치, 일대일 카운터를 절대 만들어내지 마라.
-JSON에 제공된 추천 순위나 점수를 변경하지 말고, 각 후보가 왜 도움이 되는지 비교해서
-3~5문장으로 명료하게 설명하라. 사용자 질문이 있으면 그 맥락도 반영하되 데이터가 없으면 명시하라.
-직접 입력한 픽/밴은 확정 정보로 취급하고 픽이 금지된 챔피언은 절대 권유하지 마라.
-confirmed_bans만 실제로 밴된 챔피언이다. suggested_bans는 아직 밴하지 않은 추천 밴 후보이며,
-이를 실제 밴으로 설명하거나 confirmed_bans에 없는 챔피언이 밴됐다고 말하지 마라.
-declared_pool은 사용자가 등록한 주력 목록이며 실제 전적이나 숙련도 측정값이 아니다.
-위험도 및 부정확성 주의: 실제 라이브 밴픽 데이터를 확인한 것은 아니다.'''
+EXPLANATION_POLICY = 'validated_evidence_v1'
+PROMPT = '''너는 한국어 밴픽 코치다. 추천 순위와 점수는 이미 확정되어 있다.
+사용자의 질문, 아군·상대 조합을 고려해 상위 3명 각각의 reasons 중 가장 관련 있는 근거를
+1~2개 선택하라. 후보 순서는 그대로 유지하고 각 reasons 배열의 0부터 시작하는 인덱스만 반환하라.
+새 근거, 챔피언 이름, 밴 상태나 자유 서술을 생성하지 마라.
+confirmed_bans만 확정 밴이며 suggested_bans는 아직 밴하지 않은 추천 후보다.
+declared_pool은 주력 등록 목록이며 실제 전적·숙련도 측정값이 아니다.'''
+OUTPUT_FORMAT = {
+    'type': 'json_schema', 'name': 'draft_evidence', 'strict': True,
+    'schema': {
+        'type': 'object', 'additionalProperties': False,
+        'properties': {'reason_indices': {'type': 'array', 'items': {
+            'type': 'array', 'items': {'type': 'integer'}}}},
+        'required': ['reason_indices'],
+    },
+}
 
-async def explain(req:DraftRequest,analysis:dict) -> tuple[str,str]:
-    key=os.getenv('OPENAI_API_KEY','').strip()
+
+def render_explanation(req: DraftRequest, analysis: dict, output: str) -> str:
+    data = json.loads(output)
+    recs = analysis['recommendations'][:3]
+    if not isinstance(data, dict) or set(data) != {'reason_indices'}:
+        raise ValueError('Unexpected explanation fields')
+    selections = data['reason_indices']
+    if not isinstance(selections, list) or len(selections) != len(recs):
+        raise ValueError('Evidence count does not match recommendations')
+    sentences = []
+    for rank, (candidate, indices) in enumerate(zip(recs, selections, strict=True), 1):
+        reasons = candidate['reasons']
+        if (not isinstance(indices, list) or not 1 <= len(indices) <= 2
+                or any(type(i) is not int or not 0 <= i < len(reasons) for i in indices)
+                or len(indices) != len(set(indices))):
+            raise ValueError('Invalid evidence index')
+        selected = ' / '.join(reasons[i] for i in indices)
+        sentences.append(f"{rank}순위 {candidate['name']}({candidate['score']}점). 근거: {selected}.")
+    if req.question:
+        sentences.append('추가 질문에 대해 전적·실시간 상성 등 제공되지 않은 정보는 답변하지 않습니다.')
+    sentences.append('점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.')
+    return '\n'.join(sentences)
+
+
+async def explain(req: DraftRequest, analysis: dict) -> tuple[str, str]:
+    key = os.getenv('OPENAI_API_KEY', '').strip()
     if not key:
-        return deterministic_explanation(analysis,req), 'demo_no_api_key'
+        return deterministic_explanation(analysis, req), 'demo_no_api_key'
+    if not analysis['recommendations']:
+        return deterministic_explanation(analysis, req), 'rules_no_candidates'
     try:
         from openai import AsyncOpenAI
-        client=AsyncOpenAI(api_key=key, timeout=18.0, max_retries=0)
-        model_analysis={**analysis, 'suggested_bans':analysis['bans']}
+        client = AsyncOpenAI(api_key=key, timeout=18.0, max_retries=0)
+        model_analysis = {**analysis, 'suggested_bans': analysis['bans']}
         del model_analysis['bans']
-        payload={'position':req.role,'allies':req.allies,'enemies':req.enemies,
-                 'confirmed_bans':req.bans,'declared_pool':req.pool,
-                 'question':req.question,'style':req.style,'analysis':model_analysis}
-        response=await client.responses.create(
-            model=os.getenv('OPENAI_MODEL','gpt-4.1-mini'),
-            instructions=PROMPT,
-            input=json.dumps(payload,ensure_ascii=False),
+        model_analysis['recommendations'] = analysis['recommendations'][:3]
+        payload = {'position': req.role, 'allies': req.allies, 'enemies': req.enemies,
+                   'confirmed_bans': req.bans, 'declared_pool': req.pool,
+                   'question': req.question, 'style': req.style, 'analysis': model_analysis}
+        response = await client.responses.create(
+            model=os.getenv('OPENAI_MODEL', 'gpt-4.1-mini'), instructions=PROMPT,
+            input=json.dumps(payload, ensure_ascii=False), text={'format': OUTPUT_FORMAT},
             max_output_tokens=450)
-        text=response.output_text.strip()
-        if not text:
-            raise ValueError('Empty model output')
-        return text,'openai'
     except Exception:
-        # Fail safe; detailed errors are logged server side, never leak credentials to user.
-        return deterministic_explanation(analysis,req), 'fallback_openai_error'
+        return deterministic_explanation(analysis, req), 'fallback_openai_error'
+    try:
+        return render_explanation(req, analysis, response.output_text), 'openai'
+    except (ValueError, TypeError):
+        return deterministic_explanation(analysis, req), 'fallback_invalid_explanation'

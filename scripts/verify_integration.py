@@ -2,6 +2,7 @@
 import argparse
 from hashlib import sha256
 import json
+from itertools import permutations
 import subprocess
 import time
 from datetime import datetime
@@ -11,6 +12,22 @@ import httpx
 from evaluate import SCENARIOS
 from app.champions import local_champions
 from app.scoring import draft_analysis
+from app.llm import EXPLANATION_POLICY
+
+
+def valid_grounded_text(req, data):
+    recs=data['recommendations'][:3]
+    lines=data['explanation'].splitlines()
+    expected_tail=['점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.']
+    if req.question:
+        expected_tail.insert(0,'추가 질문에 대해 전적·실시간 상성 등 제공되지 않은 정보는 답변하지 않습니다.')
+    if len(lines)!=len(recs)+len(expected_tail) or lines[len(recs):]!=expected_tail:
+        return False
+    for rank,c in enumerate(recs,1):
+        allowed={f"{rank}순위 {c['name']}({c['score']}점). 근거: {' / '.join(reasons)}."
+                 for count in (1,2) for reasons in permutations(c['reasons'],count)}
+        if lines[rank-1] not in allowed:return False
+    return data.get('explanation_policy')==EXPLANATION_POLICY
 
 
 def main():
@@ -22,7 +39,7 @@ def main():
     report={'started_at':datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),
             'tested_app_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
             'source_hashes':{name:sha256(Path(name).read_bytes()).hexdigest() for name in ('app/llm.py','app/scoring.py','app/agent.py','app/mcp_client.py')},
-            'validation_scope':'HTTP status, actual execution modes, graph trace, unchanged deterministic recommendations and history; explanation accuracy reviewed separately',
+            'validation_scope':'HTTP status, actual execution modes, graph trace, unchanged recommendations, server-owned evidence text contract and history; not independent game-data accuracy',
             'base_url':args.base_url,'real_requests':True,'cases':[]}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     def save():
@@ -45,7 +62,8 @@ def main():
             record['response']=response.json()
             data=record['response']
             expected=draft_analysis(req,local_champions())
-            record['passed']=(response.status_code==200 and data.get('llm_mode')=='openai'
+            record['grounding_contract_passed']=response.status_code==200 and valid_grounded_text(req,data)
+            record['passed']=(record['grounding_contract_passed'] and response.status_code==200 and data.get('llm_mode')=='openai'
                               and data.get('graph_mode')=='langgraph' and data.get('mcp_mode')=='mcp_stdio'
                               and data.get('trace')==expected_trace
                               and data.get('recommendations')==expected['recommendations'])
