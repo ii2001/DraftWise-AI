@@ -1,0 +1,61 @@
+{
+  "measured_at": "2026-10-22T11:54:46.483328+09:00",
+  "seed": 20261022,
+  "case_count": 10,
+  "role_counts": {
+    "TOP": 2,
+    "JUNGLE": 2,
+    "MID": 2,
+    "ADC": 2,
+    "SUPPORT": 2
+  },
+  "repair_opportunity_count": 6,
+  "summary": {
+    "baseline": {
+      "valid_count": 10,
+      "mean_recommendation_score": 70.31,
+      "mean_composition_score": 90,
+      "complete_count": 6,
+      "repair_success_count": 2,
+      "mean_of_case_medians_ms": 0.00600615
+    },
+    "improved": {
+      "valid_count": 10,
+      "mean_recommendation_score": 73.61,
+      "mean_composition_score": 95,
+      "complete_count": 8,
+      "repair_success_count": 4,
+      "mean_of_case_medians_ms": 0.035973
+    }
+  },
+  "unrepaired_cases": [
+    {
+      "case": "R06 TOP",
+      "missing_traits": [
+        "frontline"
+      ],
+      "pool_ids": [
+        "Riven",
+        "Kayle",
+        "Yasuo"
+      ],
+      "reason": "All three eligible candidates have tank < 2; the missing frontline trait cannot be supplied within the shared pool-only restriction."
+    },
+    {
+      "case": "R08 MID",
+      "missing_traits": [
+        "frontline"
+      ],
+      "pool_ids": [
+        "Orianna",
+        "Seraphine",
+        "Kayle"
+      ],
+      "reason": "All three eligible candidates have tank < 2; the missing frontline trait cannot be supplied within the shared pool-only restriction."
+    }
+  ],
+  "new_real_api_calls": 0,
+  "total_timing_samples": 4000,
+  "inputs_and_frozen_hashes_verified": true,
+  "initial_measurement_repeated_reason": "First timing run overlapped unit-test execution; retained in attempts. Final measurement ran after those tests completed, same frozen inputs, seed and outcomes."
+}

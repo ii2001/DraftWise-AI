@@ -1,0 +1,24 @@
+{
+  "frozen_at": "2026-10-22T11:53:46.299069+09:00",
+  "cases": 10,
+  "seed": 20261022,
+  "repeats": 200,
+  "warmups": 20,
+  "primary_baseline_draws_per_case": 1,
+  "outcome_seed": 20361022,
+  "timing_seed_start": 20461022,
+  "metrics": [
+    "mean existing recommendation rule score (not independent accuracy)",
+    "mean composition score: AD/AP/frontline/CC presence, 25 points each",
+    "complete compositions out of 10",
+    "strictly improved composition among inputs with score<100",
+    "local runtime medians"
+  ],
+  "generation": "two inputs per role, 10 random bans + four role-matched ally picks + five role-matched enemy picks without reuse; common three random eligible pool candidates, pool_only true, balanced",
+  "input_selection": "no result-based filtering or seed search",
+  "source_hashes": {
+    "evaluate.py": "9a8f7d2cc9c40a02244b162cbcf6c54ff430f2eaeb928c5befedcb621efd079c",
+    "app/scoring.py": "dc287645c9e22cf30310bf88196214e56bd1b0ab47166301ad230441aec4fee5",
+    "data/champions.json": "31b2de8e51a9fdf30fa46a9f76ca61c2be21ee7e3ebd009c513c028b1db495c0"
+  }
+}

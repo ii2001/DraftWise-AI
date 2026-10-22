@@ -1,0 +1,50 @@
+R01 TOP before= 100
+  baseline: 야스오, app_score=67.0, composition=100, complete=True, median=0.006500 ms
+  improved: 문도 박사, app_score=68.8, composition=100, complete=True, median=0.034084 ms
+R02 JUNGLE before= 75
+  baseline: 다이애나, app_score=72.4, composition=75, complete=False, median=0.006166 ms
+  improved: 렐, app_score=82.4, composition=100, complete=True, median=0.037125 ms
+R03 MID before= 100
+  baseline: 아지르, app_score=67.0, composition=100, complete=True, median=0.006333 ms
+  improved: 리산드라, app_score=68.0, composition=100, complete=True, median=0.033980 ms
+R04 ADC before= 100
+  baseline: 아펠리오스, app_score=65.8, composition=100, complete=True, median=0.005292 ms
+  improved: 제리, app_score=69.0, composition=100, complete=True, median=0.032938 ms
+R05 SUPPORT before= 75
+  baseline: 타릭, app_score=80.8, composition=100, complete=True, median=0.005625 ms
+  improved: 타릭, app_score=80.8, composition=100, complete=True, median=0.037583 ms
+R06 TOP before= 75
+  baseline: 리븐, app_score=69.2, composition=75, complete=False, median=0.006416 ms
+  improved: 리븐, app_score=69.2, composition=75, complete=False, median=0.037895 ms
+R07 JUNGLE before= 75
+  baseline: 브랜드, app_score=63.8, composition=75, complete=False, median=0.006188 ms
+  improved: 람머스, app_score=80.8, composition=100, complete=True, median=0.037417 ms
+R08 MID before= 75
+  baseline: 오리아나, app_score=70.0, composition=75, complete=False, median=0.006458 ms
+  improved: 세라핀, app_score=70.0, composition=75, complete=False, median=0.039084 ms
+R09 ADC before= 100
+  baseline: 바루스, app_score=70.8, composition=100, complete=True, median=0.005459 ms
+  improved: 바루스, app_score=70.8, composition=100, complete=True, median=0.035125 ms
+R10 SUPPORT before= 75
+  baseline: 애쉬, app_score=76.3, composition=100, complete=True, median=0.005625 ms
+  improved: 브라움, app_score=76.3, composition=100, complete=True, median=0.034500 ms
+Cases: 10 seed: 20261022 repair opportunities: 6
+{
+  "baseline": {
+    "valid_count": 10,
+    "mean_recommendation_score": 70.31,
+    "mean_composition_score": 90,
+    "complete_count": 6,
+    "repair_success_count": 2,
+    "mean_of_case_medians_ms": 0.00600615
+  },
+  "improved": {
+    "valid_count": 10,
+    "mean_recommendation_score": 73.61,
+    "mean_composition_score": 95,
+    "complete_count": 8,
+    "repair_success_count": 4,
+    "mean_of_case_medians_ms": 0.035973
+  }
+}
+Local synthetic comparison only; not API latency, game win rate or independent accuracy.

@@ -1,0 +1,392 @@
+[
+  {
+    "title": "R01 TOP",
+    "request": {
+      "role": "TOP",
+      "allies": [
+        "Fiddlesticks",
+        "Anivia",
+        "Jhin",
+        "Leona"
+      ],
+      "enemies": [
+        "KSante",
+        "Skarner",
+        "Xerath",
+        "Xayah",
+        "Zyra"
+      ],
+      "bans": [
+        "Nasus",
+        "Veigar",
+        "Lillia",
+        "Heimerdinger",
+        "Aurora",
+        "Kayle",
+        "Karthus",
+        "Katarina",
+        "Aatrox",
+        "Tristana"
+      ],
+      "pool": [
+        "DrMundo",
+        "Yasuo",
+        "Gwen"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R02 JUNGLE",
+    "request": {
+      "role": "JUNGLE",
+      "allies": [
+        "Ryze",
+        "Kayle",
+        "Smolder",
+        "Ashe"
+      ],
+      "enemies": [
+        "Ambessa",
+        "Zac",
+        "Chogath",
+        "Ezreal",
+        "Shen"
+      ],
+      "bans": [
+        "Garen",
+        "Swain",
+        "Ekko",
+        "Kaisa",
+        "Vi",
+        "Samira",
+        "Ahri",
+        "Vex",
+        "Nilah",
+        "Galio"
+      ],
+      "pool": [
+        "Diana",
+        "Evelynn",
+        "Rell"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R03 MID",
+    "request": {
+      "role": "MID",
+      "allies": [
+        "Ornn",
+        "Vi",
+        "Ziggs",
+        "Annie"
+      ],
+      "enemies": [
+        "DrMundo",
+        "Morgana",
+        "Seraphine",
+        "Jinx",
+        "Bard"
+      ],
+      "bans": [
+        "Karma",
+        "Sylas",
+        "MonkeyKing",
+        "Corki",
+        "Hwei",
+        "Rengar",
+        "Xayah",
+        "Rammus",
+        "Cassiopeia",
+        "Renata"
+      ],
+      "pool": [
+        "AurelionSol",
+        "Lissandra",
+        "Azir"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R04 ADC",
+    "request": {
+      "role": "ADC",
+      "allies": [
+        "Poppy",
+        "Shyvana",
+        "AurelionSol",
+        "Velkoz"
+      ],
+      "enemies": [
+        "Warwick",
+        "Diana",
+        "Kennen",
+        "Ashe",
+        "Renata"
+      ],
+      "bans": [
+        "Lulu",
+        "Soraka",
+        "Janna",
+        "Ahri",
+        "Darius",
+        "Briar",
+        "Ornn",
+        "Kalista",
+        "Urgot",
+        "Sion"
+      ],
+      "pool": [
+        "Aphelios",
+        "Zeri",
+        "Sivir"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R05 SUPPORT",
+    "request": {
+      "role": "SUPPORT",
+      "allies": [
+        "Yasuo",
+        "Lillia",
+        "Morgana",
+        "Caitlyn"
+      ],
+      "enemies": [
+        "Yone",
+        "Evelynn",
+        "Akali",
+        "MissFortune",
+        "Zyra"
+      ],
+      "bans": [
+        "Aphelios",
+        "Katarina",
+        "Anivia",
+        "Graves",
+        "Lux",
+        "Syndra",
+        "Sona",
+        "Zilean",
+        "Nilah",
+        "Ashe"
+      ],
+      "pool": [
+        "Bard",
+        "Annie",
+        "Taric"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R06 TOP",
+    "request": {
+      "role": "TOP",
+      "allies": [
+        "Talon",
+        "Karma",
+        "Varus",
+        "Zyra"
+      ],
+      "enemies": [
+        "Shen",
+        "Trundle",
+        "Veigar",
+        "Sivir",
+        "Thresh"
+      ],
+      "bans": [
+        "Akshan",
+        "Orianna",
+        "Sylas",
+        "Leona",
+        "Renekton",
+        "Ambessa",
+        "Senna",
+        "Mordekaiser",
+        "Zilean",
+        "Jax"
+      ],
+      "pool": [
+        "Riven",
+        "Kayle",
+        "Yasuo"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R07 JUNGLE",
+    "request": {
+      "role": "JUNGLE",
+      "allies": [
+        "Fiora",
+        "Naafiri",
+        "Draven",
+        "Soraka"
+      ],
+      "enemies": [
+        "Riven",
+        "LeeSin",
+        "Lux",
+        "Ezreal",
+        "Alistar"
+      ],
+      "bans": [
+        "Ziggs",
+        "Kindred",
+        "Maokai",
+        "Sylas",
+        "Poppy",
+        "TwistedFate",
+        "Urgot",
+        "Nasus",
+        "Nautilus",
+        "Hwei"
+      ],
+      "pool": [
+        "Brand",
+        "Trundle",
+        "Rammus"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R08 MID",
+    "request": {
+      "role": "MID",
+      "allies": [
+        "Fiora",
+        "Graves",
+        "Senna",
+        "Lux"
+      ],
+      "enemies": [
+        "Sett",
+        "Vi",
+        "Akali",
+        "Varus",
+        "Renata"
+      ],
+      "bans": [
+        "Velkoz",
+        "KSante",
+        "Zyra",
+        "Teemo",
+        "Swain",
+        "Karthus",
+        "Evelynn",
+        "Sion",
+        "Renekton",
+        "Twitch"
+      ],
+      "pool": [
+        "Orianna",
+        "Seraphine",
+        "Kayle"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R09 ADC",
+    "request": {
+      "role": "ADC",
+      "allies": [
+        "Vayne",
+        "Kindred",
+        "Viktor",
+        "Poppy"
+      ],
+      "enemies": [
+        "Nasus",
+        "Skarner",
+        "Ryze",
+        "Senna",
+        "Blitzcrank"
+      ],
+      "bans": [
+        "Cassiopeia",
+        "Irelia",
+        "Qiyana",
+        "Mordekaiser",
+        "Bard",
+        "Maokai",
+        "Draven",
+        "Volibear",
+        "JarvanIV",
+        "Akali"
+      ],
+      "pool": [
+        "Varus",
+        "Aphelios",
+        "Ezreal"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  },
+  {
+    "title": "R10 SUPPORT",
+    "request": {
+      "role": "SUPPORT",
+      "allies": [
+        "Olaf",
+        "Nidalee",
+        "Kayle",
+        "Ezreal"
+      ],
+      "enemies": [
+        "Yasuo",
+        "Morgana",
+        "Karthus",
+        "Vayne",
+        "Nautilus"
+      ],
+      "bans": [
+        "Kalista",
+        "Sivir",
+        "Jax",
+        "Qiyana",
+        "Blitzcrank",
+        "Darius",
+        "Jayce",
+        "Shen",
+        "Katarina",
+        "Gangplank"
+      ],
+      "pool": [
+        "Ashe",
+        "Braum",
+        "Soraka"
+      ],
+      "pool_only": true,
+      "style": "balanced",
+      "question": ""
+    }
+  }
+]

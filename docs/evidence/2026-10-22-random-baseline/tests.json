@@ -1,0 +1,36 @@
+{
+  "python": "3.12.13",
+  "node": "v26.5.0",
+  "runs": [
+    {
+      "name": "python-tests",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "started_at": "2026-10-22T11:54:00.330667+09:00",
+      "exit_code": 0
+    },
+    {
+      "name": "node-tests",
+      "command": [
+        "node",
+        "--test",
+        "tests/test_draft_ui.cjs"
+      ],
+      "started_at": "2026-10-22T11:54:01.332635+09:00",
+      "exit_code": 0
+    }
+  ],
+  "counts": {
+    "python": 46,
+    "node": 8
+  },
+  "source_hashes": {
+    "evaluate.py": "9a8f7d2cc9c40a02244b162cbcf6c54ff430f2eaeb928c5befedcb621efd079c",
+    "tests/test_evaluate.py": "6f262672c2b31bb478b34a8e7cf89359cde77a3bc9a1e0ef765d0134729b3162",
+    "app/scoring.py": "dc287645c9e22cf30310bf88196214e56bd1b0ab47166301ad230441aec4fee5"
+  }
+}

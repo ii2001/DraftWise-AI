@@ -13,7 +13,8 @@
 | [REPORT.md](REPORT.md) | 번호·성함 기입란, 평가 기준별 구현·실행 증거·실측·한계·느낀 점 초안 |
 | [PRESENTATION.md](PRESENTATION.md) | 5분 목표 발표 구성·대본·화면 전환·예상 질문 |
 | [제출 체크리스트](SUBMISSION_CHECKLIST.md) | 검증 완료 항목과 사용자 확인이 남은 항목 |
-| [최신 수정 검증](docs/evidence/2026-10-22-grounding-fix/) | Python 43·Node 8, 실제 통합 실행, 브라우저·이전 이력 보호, 화면 PNG |
+| [설명 오류 수정 검증](docs/evidence/2026-10-22-grounding-fix/) | Python 43·Node 8, 실제 통합 실행, 브라우저·이전 이력 보호, 화면 PNG |
+| [랜덤 10개 비교](docs/evidence/2026-10-22-random-baseline/) | 고정 seed의 밴픽 10개, 점수·4,000개 시간 표본, Python 46·Node 8 검사 |
 | [최초 실측 원본](docs/evidence/2026-10-22/) | 동일 4개 입력의 비교 시간 표본과 수정 전 설명 오류 원본 |
 
 검증 원본과 수정 전 실패 기록을 함께 보관합니다. 최종 정량 결과·실행 환경·수정 전후의 AI 설명 검토는 보고서를 기준으로 확인하세요. 추가 고객 기능 개발은 중단했으며 제출 검증 중 발견한 AI 밴 설명 오류를 검증된 근거 선택과 서버 문장 조립으로 수정했습니다.
@@ -24,7 +25,7 @@
 python -m pytest -q
 node --test tests/test_draft_ui.cjs
 python -m scripts.verify_prompt_context  # 모의 클라이언트를 사용한 오프라인 회귀 검사
-python evaluate.py --repeats 200 --output /tmp/draftwise-benchmark.json
+python evaluate.py --cases 10 --seed 20261022 --repeats 200 --output /tmp/draftwise-benchmark.json
 # 아래 검증은 실제 OpenAI API를 4회 호출하므로 비용이 발생합니다.
 python -m scripts.verify_integration --base-url http://127.0.0.1:8600 --output /tmp/draftwise-integration.json
 ```
@@ -149,7 +150,11 @@ node --test tests/test_draft_ui.cjs
 
 ### Before/After 설명
 
-`evaluate.py`는 **가나다순 첫 챔피언 추천**이라는 단순 Baseline과 현재 추천 로직을 동일한 4개 입력으로 비교합니다. 성공 여부는 사전에 정한 피해 유형·탱킹·픽/밴 준수 조건으로 판정하며 추천 점수 자체로 성공을 판정하지 않습니다. 각 입력·방식당 준비 실행 20회 후 200회를 측정하고 원본 시간 표본, 평균·중앙값·p95를 JSON으로 저장합니다. 로컬 계산 구간만 측정하므로 HTTP·MCP·LangGraph·OpenAI 시간을 포함하지 않습니다. 이는 실제 경기 승률 실험이나 과거 제품 버전과의 비교가 아닙니다. [보고서](REPORT.md)에 전체 API 실행 시간과 함께 범위·한계를 구분해 기록했습니다.
+`evaluate.py`는 **seed `20261022`로 생성한 랜덤 밴픽 10개**에서 균등 랜덤 추천과 현재 추천을 비교합니다. 다섯 포지션을 2번씩 포함하고 입력마다 아군 4픽·상대 5픽·10밴·공통 주력 후보 3명을 사용합니다. 두 방식 모두 같은 주력 제한을 지킵니다. 조합 완성도는 AD·AP·앞라인·강한 CC를 하나 이상 갖추면 각각 25점으로 별도 계산합니다.
+
+실측 결과 조합 완성도 평균은 **90 → 95점**, 네 특성을 모두 갖춘 조합은 **6/10 → 8/10**입니다. 원래 부족했던 6건 중 보완은 **2/6 → 4/6**이며 나머지 두 건은 후보 모두 앞라인 특성이 없었습니다. 평균 앱 추천 점수는 **70.31 → 73.61점**이지만 개선 방식이 같은 점수의 최댓값을 고르므로 독립 정확도 증거가 아닙니다.
+
+각 입력·방식당 준비 20회 후 200회, 총 4,000개 로컬 시간 표본을 저장했습니다. 입력별 중앙값의 평균은 **0.006006ms → 0.035973ms**로 개선 방식이 더 느렸습니다. HTTP·MCP·LangGraph·OpenAI는 포함하지 않았고 새 API 호출은 없습니다. 한 seed의 합성 입력 결과이며 실제 승률로 해석하지 않습니다. [보고서](REPORT.md)와 [원본](docs/evidence/2026-10-22-random-baseline/benchmark.json)에 기준과 한계를 기록했습니다. 이전 4건의 가나다순 비교 증거는 보존했습니다.
 
 ## 한계 및 트레이드오프
 

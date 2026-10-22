@@ -11,9 +11,10 @@
     4,
     5,
     6,
+    7,
     8
   ],
-  "architecture_and_comparison_graph_unchanged": true,
+  "architecture_and_comparison_graph_unchanged": false,
   "notes_target_seconds": 285,
   "actual_rehearsal_measured": false,
   "all_embedded_images_match_original_bytes": true,
@@ -105,11 +106,8 @@
     }
   ],
   "renderer": "LibreOffice 26.8.1 headless PDF export; PyMuPDF PNG rendering",
-  "unmodified_slides_pixel_identical_to_original": [
-    7
-  ],
   "pdf_font_family": "Noto Sans CJK KR (embedded subsets)",
-  "output_sha256": "b96b403fcd3e6b9df3b5a0b5fba424430052fa6f067164348b0ee7b5fd40d3b6",
+  "output_sha256": "3adc5fc23552b2d09c0c4b6226c1a2ecda33d8a0ee190a377cdc4323f25503d9",
   "cleanup_source_commit": "f744513874155d906e25771ae556b2fab22b2e95",
   "cleanup_source_sha256": "dcc0d25ded151557947dc70d848105f4584558e6b63a72b4115cd6bc8630738d",
   "cleanup_modified_slides": [
@@ -128,14 +126,42 @@
     "제출·Zoom 일정",
     "반복 안내 문구"
   ],
-  "rendered_slide_count": 8,
-  "all_native_text_present_in_pdf": true,
-  "edited_slides_text_present_in_pdf": true,
   "edited_slides_text_boxes_do_not_overlap_images": true,
   "removed_phrases_absent_from_pdf": true,
   "editable_native_text_shapes": 116,
   "no_presentation_edit_password_or_text_selection_lock": true,
-  "pdf_sha256": "0b0abb85788d577d5a05dd14cc577ad3f45ebe7fe81c42ca18f5dd38e7ece610",
+  "evaluation_source_commit": "899974480f7d96a1a70f39205a2d3035fc86f6bc",
+  "evaluation_source_sha256": "b96b403fcd3e6b9df3b5a0b5fba424430052fa6f067164348b0ee7b5fd40d3b6",
+  "evaluation_modified_slides": [
+    6,
+    7
+  ],
+  "evaluation_evidence": "docs/evidence/2026-10-22-random-baseline/benchmark.json",
+  "evaluation_seed": 20261022,
+  "evaluation_case_count": 10,
+  "comparison_graph_values": {
+    "metric": "mean structural composition score / 100",
+    "baseline": 90,
+    "improved": 95,
+    "complete_counts": {
+      "baseline": 6,
+      "improved": 8
+    }
+  },
+  "architecture_diagram_preserved": true,
+  "comparison_graph_design_preserved_values_updated": true,
+  "rendered_slide_count": 8,
+  "all_native_text_present_in_pdf": true,
+  "edited_slides_text_present_in_pdf": true,
+  "unmodified_slides_pixel_identical_to_cleanup_version": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    8
+  ],
+  "pdf_sha256": "ab42fbb686c0c2c441154d3c6b54ba24b853845e297b9900154ba1a19ce194c0",
   "visually_reviewed_slides": [
     1,
     2,

@@ -1,0 +1,16 @@
+✔ arbitrary empty slots serialize as champion IDs without empty entries (2.149166ms)
+✔ replacement and removal preserve other slot positions (0.704791ms)
+✔ picked and banned champions cannot be reused, but remain eligible for the pool (0.424ms)
+✔ team limits and reset retain the four teammate / five opponent model (0.34775ms)
+✔ saved role and personal pool survive reset and example drafts (0.561458ms)
+✔ malformed or unavailable browser storage does not prevent drafting (1.262542ms)
+✔ comparison switches the preview without changing the draft or making requests (0.292708ms)
+✔ history restores slots and settings without replacing personal pool preferences (0.734667ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.591833
