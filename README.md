@@ -4,14 +4,38 @@
 
 아군 픽·상대 픽·밴 챔피언·본인 챔피언 풀을 입력하면, **정량적 조합 점수**와 **AI 코치의 설명**을 받아볼 수 있는 웹 서비스입니다.
 
-**프로젝트 방식:** 기존 서버 장애 진단 코드를 복사하지 않고 독립 개발. 다만 과제에 제시된 Vue/FastAPI/LangGraph/MCP/LLM 구성 및 역할은 그대로 구현했습니다. 과제 안내의 '제공된 ZIP 기반 재활용' 요건은 제출 담당자에게 재확인이 필요합니다.
+**프로젝트 방식:** 제공 원본 ZIP을 재사용하지 않은 독립 구현입니다. 최종 평가 기준은 기능 구현 30점, 기술 요소 30점, 한계·트레이드오프 20점, 발표 자료·발표 20점이며, Before/After 실측 비교 보너스는 10점입니다. 원본 ZIP 재사용의 필수 여부는 제공된 최종 평가표에 명시되어 있지 않아 충족했다고 주장하지 않습니다.
+
+## 최종 제출 자료
+
+| 자료 | 내용 |
+|---|---|
+| [REPORT.md](REPORT.md) | 번호·성함 기입란, 평가 기준별 구현·실행 증거·실측·한계·느낀 점 초안 |
+| [PRESENTATION.md](PRESENTATION.md) | 5분 목표 발표 구성·대본·화면 전환·예상 질문 |
+| [제출 체크리스트](SUBMISSION_CHECKLIST.md) | 검증 완료 항목과 사용자 확인이 남은 항목 |
+| [실측 원본](docs/evidence/2026-10-22/) | 테스트 로그, 실제 통합 실행 JSON, 브라우저 검사, 화면 PNG, 비교 시간 표본 |
+
+검증 원본과 수정 전 실패 기록을 함께 보관합니다. 최종 정량 결과·실행 환경·수정 전후의 AI 설명 검토는 보고서를 기준으로 확인하세요. 추가 고객 기능 개발은 중단했으며 제출 검증 중 발견한 밴 설명 혼동만 최소 수정했습니다.
+
+### 제출 검증 재현
+
+```bash
+python -m pytest -q
+node --test tests/test_draft_ui.cjs
+python -m scripts.verify_prompt_context  # 모의 클라이언트를 사용한 오프라인 회귀 검사
+python evaluate.py --repeats 200 --output /tmp/draftwise-benchmark.json
+# 아래 검증은 실제 OpenAI API를 4회 호출하므로 비용이 발생합니다.
+python -m scripts.verify_integration --base-url http://127.0.0.1:8600 --output /tmp/draftwise-integration.json
+```
+
+서버 실행 시 `DRAFTWISE_MCP_DISABLED`를 설정하지 않아야 전체 MCP 경로를 확인할 수 있습니다. 제출 검증은 별도 포트 `8602`와 `/tmp`의 분리된 SQLite DB에서 수행했고 API 키를 로그에 기록하지 않았습니다. 브라우저 검증 재현 방법과 실제 호출 수는 [증거 안내](docs/evidence/2026-10-22/README.md)에 있습니다.
 
 ## 주요 기능
 
 1. **챔피언 픽·밴 빌더**: LoL 밴픽 스타일의 양 팀 슬롯과 중앙 챔피언 선택창. 아군 4명 / 적군 5명 / 팀별 밴 5명 / 주력픽 12명 입력. 슬롯별 선택·교체·제거, 동시 픽·밴 금지 및 중복 검증.
 2. **정량 조합 분석**: 아군 AP/AD 편중, 탱커·CC 부족, 상대 진입 압력 및 포지션별 적합도 분석. 추천 픽을 선택하면 선택 전후의 피해 유형·앞라인·CC·진입·보호 챔피언 수를 비교.
 3. **개인화 추천**: 상단에서 내 포지션을 선택하고 포지션별 주력 목록을 브라우저에 자동 저장. 숙련도(사용자가 선언한 주력픽 여부), 팀 조합, 상대 대응 점수를 가중 합산하여 추천 후보 3명 UI 및 상위 5개 API 반환.
-4. **LLM 코치**: OpenAI API가 점수·근거를 바꾸지 않고 설명을 작성. 키가 없거나 API에 오류가 나면 규칙 기반 설명 사용.
+4. **LLM 코치**: OpenAI API가 계산된 점수·근거를 입력받아 설명을 작성. 키가 없거나 API에 오류가 나면 규칙 기반 설명 사용.
 5. **MCP 도구**: 별도의 MCP 서버에서 챔피언 데이터 조회. stdio Transport / FastMCP Tool + Resource.
 6. **LangGraph**: `retrieve → score → explain` 그래프와 실행 trace.
 7. **SQLite**: 세션별 분석 결과 저장, 조회 API. 화면에서 최근 10개 분석의 픽·밴 슬롯, 포지션, 설정과 저장 당시 결과를 복원.
@@ -25,7 +49,7 @@ Python **3.11 이상** 필요. (3.12 권장)
 cd draftwise-ai
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 cp .env.example .env
 # .env 파일에 개인 OPENAI_API_KEY 입력
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8600
@@ -63,7 +87,7 @@ flowchart TD
 
 | 파일 | 기능 |
 |---|---|
-| `static/index.html`, `style.css`, `app.js` | Vue 3 기반 반응형 웹 채팅/선택 UI |
+| `static/index.html`, `style.css`, `app.js` | Vue 3 기반 반응형 챔피언 선택·분석 UI |
 | `app/main.py` | FastAPI / REST 엔드포인트 / 정적 서빙 |
 | `app/agent.py` | LangGraph StateGraph (`retrieve`, `score`, `explain`) |
 | `app/scoring.py` | 조합 분석, 후보 필터링, 가중 점수 |
@@ -98,7 +122,7 @@ curl -X POST http://127.0.0.1:8600/api/analyze \
 - **포지션 적합도:** 팀 조합 점수 내부에 기존 조합 평가 80% + 포지션 평가 20%로 반영합니다. 탑은 앞라인·CC, 정글은 진입·CC, 미드는 피해 유형 균형·CC, 원딜은 상대 진입에 대응할 기동성·CC, 서포터는 아군 보호·교전 개시를 평가합니다. 실시간 라인 상성 통계는 사용하지 않습니다.
 - **상대 대응:** 적 조합의 진입 및 앞라인 수를 감안한 일반 위험 대응. **챔피언 간 실제 카운터 승률이 아닙니다.**
 - 픽·밴된 챔피언은 후보에서 제거; 후보가 없다면 0개 반환.
-- LLM은 **정량 점수를 변경할 수 없으며** 설명만 생성합니다.
+- LLM은 **정량 점수를 변경할 수 없으며** 설명만 생성합니다. 실제 밴(`confirmed_bans`)과 추천 밴(`suggested_bans`)을 구분해 전달합니다. 설명의 사실 일치까지 코드로 보장하는 것은 아닙니다.
 
 ## 테스트
 
@@ -124,16 +148,16 @@ node --test tests/test_draft_ui.cjs
 
 ### Before/After 설명
 
-`evaluate.py`는 **가나다순 첫 챔피언 추천**이라는 단순 baseline과 DraftWise의 추천을 동일한 시나리오에서 비교합니다. 비교 대상은 후보와 휴리스틱 조합 점수일 뿐, 게임 승률·정확도 향상 수치를 입증하는 실험이 아닙니다. 통계적 유효성은 별도 실전 검증을 필요로 합니다.
+`evaluate.py`는 **가나다순 첫 챔피언 추천**이라는 단순 Baseline과 현재 추천 로직을 동일한 4개 입력으로 비교합니다. 성공 여부는 사전에 정한 피해 유형·탱킹·픽/밴 준수 조건으로 판정하며 추천 점수 자체로 성공을 판정하지 않습니다. 각 입력·방식당 준비 실행 20회 후 200회를 측정하고 원본 시간 표본, 평균·중앙값·p95를 JSON으로 저장합니다. 로컬 계산 구간만 측정하므로 HTTP·MCP·LangGraph·OpenAI 시간을 포함하지 않습니다. 이는 실제 경기 승률 실험이나 과거 제품 버전과의 비교가 아닙니다. [보고서](REPORT.md)에 전체 API 실행 시간과 함께 범위·한계를 구분해 기록했습니다.
 
 ## 한계 및 트레이드오프
 
 1. **실전 메타 반영 X:** [Data Dragon 16.21.1 공식 목록](https://ddragon.leagueoflegends.com/cdn/16.21.1/data/ko_KR/champion.json)과 ID·한글 이름을 대조한 173명을 포함합니다. 포지션과 조합 특성은 수작업 교육용 분류이며, 신규 챔피언은 `data/create_roster.py`에 추가한 뒤 다시 생성해야 합니다. Data Dragon은 이미지·정적 정보를 제공하지만 패치별 승률까지 제공하지 않습니다.
-2. **정량 점수는 휴리스틱:** 절대적인 승률이나 매치업 승패 확률이 아닙니다. 실제 승률과의 상관 검증은 미진행.
+2. **정량 점수와 AI 설명:** 점수는 휴리스틱이며 승률·매치업 승패 확률이 아닙니다. 실제 승률과의 상관 검증은 미진행입니다. 최종 실제 응답에서 밴하지 않은 자크를 밴됐다고 설명한 사례 1건이 남아 있으며, 설명의 사실 정확성을 보장하지 않습니다. [보고서 6.3절](REPORT.md)을 확인하세요.
 3. **API 비용·지연:** OpenAI API 사용 시 호출 비용 및 네트워크 지연 발생. 키 없음/실패 시 규칙형 설명으로 폴백.
 4. **MCP stdio 프로세스 비용:** 요청마다 subprocess를 만들기 때문에 고트래픽 배포에는 지속 연결/풀링 필요.
 5. **보안:** 익명 session_id만 이용하는 데모이며 사용자별 인증 없음. 외부 배포 시 인증·Rate Limit·CORS·입력 감사·비용 제한 추가 필요.
-6. **CDN 종속성:** Vue 및 이미지 등은 인터넷 연결 필요.
+6. **외부 연결:** Vue는 서버에 포함됩니다. 폰트·챔피언 이미지는 외부 CDN을 사용하고, 실제 AI 설명은 OpenAI 연결이 필요합니다. 브라우저의 외부 이미지 차단 테스트를 OpenAI 오프라인 실행으로 해석하면 안 됩니다.
 
 ## 실행 추적
 
