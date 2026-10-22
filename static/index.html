@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#0b1019"/>
+  <title>DraftWise AI | Smarter Champion Select</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="/static/style.css" rel="stylesheet"/>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div class="global-gradient"></div>
+    <header class="navbar">
+      <div class="brand"><div class="brand-emblem"><span>✦</span></div><div><div class="brand-title">DRAFT<span>WISE</span><span class="ai-pill">AI</span></div><div class="brand-sub">INTELLIGENT DRAFT ASSISTANT</div></div></div>
+      <div class="header-right"><span class="header-note"><span class="dot"></span> PATCH DATA <strong>{{version}}</strong></span><span :class="['connection',health.openai_configured?'connected':'demo']"><span class="dot"></span>{{health.openai_configured?'OPENAI READY':'DEMO MODE'}}</span><a class="nav-link" href="https://github.com" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </header>
+
+    <main class="container">
+      <section class="hero"><div class="eyebrow"><span class="eyebrow-rule"></span> THE ULTIMATE DRAFT INTELLIGENCE</div>
+        <h1>Outthink the <span>draft.</span></h1>
+        <p>우리 팀의 조합과 상대 픽을 읽고, 플레이스타일까지 고려한 <b>AI 챔피언 추천</b>을 받아보세요.</p>
+        <div class="hero-tags"><span>✧ COMPOSITION ANALYSIS</span><span>✧ CHAMPION SYNERGY</span><span>✧ AI COACHING</span></div>
+      </section>
+
+      <div class="content-grid">
+        <div class="left-column">
+          <section class="panel draft-panel">
+            <div class="section-head"><div><span class="section-kicker">01 · DRAFT SETUP</span><h2>밴픽 설정 <span class="muted-small">/ Set up your draft</span></h2></div><button class="subtle-button" @click="resetDraft">↺ 초기화</button></div>
+            <div class="label-row"><label>YOUR ROLE <span>내 포지션</span></label><div class="small-help">플레이할 포지션을 선택하세요</div></div>
+            <div class="roles"><button v-for="r in roles" :key="r.id" :class="['role-btn',role===r.id?'active':'']" @click="role=r.id"><span class="role-symbol">{{r.icon}}</span><span>{{r.label}}</span></button></div>
+            <div class="split-line"></div>
+            <div class="select-head"><div class="label-row"><label>CHAMPION SELECTION</label></div><div class="selection-note">아래 선택창에서 챔피언을 추가하세요</div></div>
+            <div class="side-tabs"><button v-for="s in selectionTypes" :key="s.id" :class="['side-tab', 'tab-'+s.id,activeSide===s.id?'active':'']" @click="activeSide=s.id"><span>{{s.symbol}}</span> {{s.label}} <em>{{draft[s.id].length}}{{s.max?` / ${s.max}`:''}}</em></button></div>
+            <div class="selected-area" :class="'selection-'+activeSide">
+              <div v-if="!draft[activeSide].length" class="empty-selection"><span class="empty-icon">＋</span><div><b>아직 선택된 챔피언이 없어요</b><small>아래에서 초상화를 클릭해 추가하세요</small></div></div>
+              <div v-else class="selected-champs"><button class="selected-chip" v-for="id in draft[activeSide]" :key="id" @click="remove(activeSide,id)" :title="id+' 제거'"><img :src="imageUrl(id)" @error="useFallback"/><span>{{name(id)}}</span><em>×</em></button></div>
+            </div>
+            <div class="champ-toolbar"><div class="champ-search"><span>⌕</span><input v-model="query" placeholder="챔피언 이름 검색..." aria-label="챔피언 이름 검색"/></div><div class="filter-wrap"><select v-model="filterRole" aria-label="챔피언 포지션 필터"><option value="ALL">모든 포지션</option><option v-for="r in roles" :key="r.id" :value="r.id">{{r.label}}</option></select><span>⌄</span></div></div>
+            <div class="champ-count"><span>AVAILABLE CHAMPIONS</span><small>{{filteredChampions.length}} / {{champions.length}}</small></div>
+            <div class="champ-roster" role="list"><button v-for="c in filteredChampions" :key="c.id" :class="['champ-option',isSelected(c.id)?'taken':'',draft[activeSide].includes(c.id)?'this-selected':'']" @click="pick(c.id)" :title="c.name"><div class="portrait"><img :src="imageUrl(c.id)" :alt="c.name" loading="lazy" @error="useFallback"/><span v-if="draft[activeSide].includes(c.id)" class="tick">✓</span></div><span class="champ-label">{{c.name}}</span></button><div v-if="!filteredChampions.length" class="search-empty">검색 결과가 없어요.</div></div>
+            <div class="roster-footer">공식 챔피언 이미지: Riot Data Dragon · 조합 특성은 교육용 데이터</div>
+          </section>
+          <section class="panel preferences-panel"><div class="section-head tight"><div><span class="section-kicker">02 · PREFERENCE</span><h2>추천 세부 설정</h2></div></div>
+            <label class="field-label">분석 우선순위</label>
+            <div class="setting-pills"><button v-for="s in styles" :key="s.id" @click="style=s.id" :class="['setting-pill',style===s.id?'active':'']">{{s.label}}</button></div>
+            <label class="toggle-wrap"><span><b>내 챔피언 풀에서만 추천</b><small>⭐ 선호 챔피언에 추가한 챔피언만 분석</small></span><input type="checkbox" v-model="poolOnly"/><span class="toggle"></span></label>
+            <label class="field-label" for="extraQuestion">AI 코치에게 추가할 질문 <span>(선택)</span></label><textarea id="extraQuestion" v-model="question" rows="2" maxlength="300" placeholder="예: AP 정글 중에서 한타가 좋은 챔피언은?" ></textarea>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="action-panel"><div class="action-top"><div><div class="action-eyebrow">AI DRAFT ENGINE</div><h3>당신의 다음 픽을<br/><span>전략적으로.</span></h3></div><div class="action-spark">✦</div></div><div class="action-stat"><span>분석 대상</span><b>{{draft.allies.length + draft.enemies.length}} PICKED <i>·</i> {{draft.bans.length}} BANNED</b></div><button @click="analyze" :disabled="loading || !champions.length" class="analyze-button">{{loading?'분석 중...':'✦  AI 밴픽 분석 시작'}} <span>{{loading?'◌':'→'}}</span></button><div class="action-bottom"><span class="mini-dot"></span>  결정론적 점수 산출 + OpenAI 전략 설명</div></section>
+
+          <section class="panel insights-panel"><div class="section-head"><div><span class="section-kicker">03 · AI ANALYSIS</span><h2>전략 인사이트</h2></div><span :class="['status-pill',result?'status-complete':'']">{{result?'ANALYSIS COMPLETE':'AWAITING INPUT'}}</span></div>
+            <div v-if="!result" class="no-analysis"><div class="orbit"><span>✧</span><i></i><i></i></div><h3>가능성은 데이터 안에 있습니다.</h3><p>좌측에서 밴픽을 구성한 뒤 분석을 시작해 보세요.<br/>챔피언별 조합 적합도를 평가해 추천해 드립니다.</p><button @click="loadPreset('ap')">⚡ 예시 조합 불러오기 →</button></div>
+            <div v-else class="has-analysis"><div class="analysis-meta"><span>TEAM COMPOSITION CHECK</span><b>{{result.considered}} CHAMPIONS SCANNED</b></div><div class="flags"><span v-for="(f,i) in result.team.flags" :key="i" :class="f.includes('없음')?'safe':''">{{f.includes('없음')?'✓':'!'}} {{f}}</span></div><div class="comp-stats"><div><span>물리 피해 픽</span><b>{{result.team.ad}}</b></div><div><span>마법 피해 픽</span><b>{{result.team.ap}}</b></div><div><span>앞라인 픽</span><b>{{result.team.frontline}}</b></div><div><span>CC 보유 픽</span><b>{{result.team.hard_cc}}</b></div></div></div>
+          </section>
+
+          <section class="panel result-panel"><div class="section-head"><div><span class="section-kicker">04 · RECOMMENDATIONS</span><h2>추천 챔피언</h2></div><span class="rec-count">{{result?result.recommendations.length:0}} PICKS</span></div>
+            <div v-if="!result" class="pre-result"><div class="skeleton" v-for="n in 3" :key="n"><div class="sk-avatar"></div><div><span></span><span></span></div></div></div>
+            <div v-else-if="!result.recommendations.length" class="no-rec">조건에 맞는 후보가 없습니다. 챔피언 풀 제한을 해제하거나 밴을 조정해 보세요.</div>
+            <div v-else class="recs"><article v-for="(c,i) in result.recommendations.slice(0,3)" :key="c.id" :class="['rec-card',i===0?'first':'']"><div class="rec-top"><div class="rank">{{String(i+1).padStart(2,'0')}}</div><img class="rec-portrait" :src="imageUrl(c.id)" @error="useFallback" :alt="c.name"/><div class="rec-info"><div class="rec-name">{{c.name}} <span>{{c.damage}}</span></div><div class="rec-reason">{{c.reasons.slice(0,2).join(' · ')}}</div></div><div class="rec-score"><b>{{c.score}}</b><span>/ 100</span></div></div><div class="bar-row"><span>숙련도</span><div class="progress"><i :style="{width:c.breakdown.comfort+'%'}"></i></div><small>{{c.breakdown.comfort}}</small></div><div class="bar-row"><span>팀 조합</span><div class="progress"><i :style="{width:c.breakdown.team+'%'}"></i></div><small>{{c.breakdown.team}}</small></div><div class="bar-row"><span>상대 대응</span><div class="progress"><i :style="{width:c.breakdown.enemy+'%'}"></i></div><small>{{c.breakdown.enemy}}</small></div></article></div>
+          </section>
+          <section v-if="result" class="panel coach-panel"><div class="section-head"><div><span class="section-kicker">05 · STRATEGIC EXPLANATION</span><h2>AI 코치 분석</h2></div><span class="coach-mode">{{result.llm_mode==='openai'?'✧ OPENAI':'✧ DEMO'}}</span></div><div class="coach-bubble"><span class="coach-avatar">✦</span><p>{{result.explanation}}</p></div><div class="ban-row"><b>추천 밴</b><div><span v-for="b in result.bans" :key="b.id"><img :src="imageUrl(b.id)" :alt="b.name" @error="useFallback"/>{{b.name}}</span></div></div><div class="footnote">※ 조합 점수는 직접 정의한 휴리스틱이며, 라이브 패치별 승률·상성 데이터가 아닙니다.</div></section>
+        </div>
+      </div>
+      <section class="examples"><div><span>QUICK START</span><h2>예시 시나리오</h2></div><div class="example-buttons"><button @click="loadPreset('ap')">⚔ AP 정글이 필요할 때 <span>→</span></button><button @click="loadPreset('tank')">🛡 앞라인이 없을 때 <span>→</span></button><button @click="loadPreset('comfort')">★ 내 주력픽 우선 <span>→</span></button></div></section>
+    </main>
+    <footer><div>✦ <b>DRAFTWISE AI</b><span>Built with FastAPI · Vue · LangGraph · MCP · OpenAI</span></div><p>Not endorsed by Riot Games. This is an educational prototype, not a live win-rate oracle.</p></footer>
+    <div v-if="toast" class="toast" role="status">{{toast}}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

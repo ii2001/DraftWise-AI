@@ -1,0 +1,152 @@
+import json
+from pathlib import Path
+# id, Korean label, roles, damage, tankiness, hard CC, engage, peel, mobility
+raw = '''
+Aatrox|아트록스|TOP|AD|2|1|1|0|1
+Ahri|아리|MID|AP|0|2|1|1|3
+Akali|아칼리|MID,TOP|AP|0|0|1|0|3
+Alistar|알리스타|SUPPORT|AP|3|3|3|3|1
+Amumu|아무무|JUNGLE,SUPPORT|AP|3|3|3|1|1
+Annie|애니|MID,SUPPORT|AP|0|3|2|1|0
+Aphelios|아펠리오스|ADC|AD|0|1|0|0|0
+Ashe|애쉬|ADC,SUPPORT|AD|0|3|1|2|0
+Azir|아지르|MID|AP|0|1|1|1|1
+Bard|바드|SUPPORT|AP|0|3|2|2|2
+Belveth|벨베스|JUNGLE|AD|1|1|1|0|3
+Blitzcrank|블리츠크랭크|SUPPORT|AP|2|3|3|1|0
+Brand|브랜드|MID,SUPPORT,JUNGLE|AP|0|1|0|0|0
+Braum|브라움|SUPPORT|AP|3|2|1|3|1
+Caitlyn|케이틀린|ADC|AD|0|1|0|0|1
+Camille|카밀|TOP|AD|2|2|2|0|3
+Cassiopeia|카시오페아|MID|AP|0|1|0|0|0
+Chogath|초가스|TOP,MID|AP|3|2|2|1|0
+Darius|다리우스|TOP|AD|2|1|1|0|0
+Diana|다이애나|JUNGLE,MID|AP|1|2|3|0|2
+Draven|드레이븐|ADC|AD|0|1|0|0|0
+Ekko|에코|JUNGLE,MID|AP|0|2|2|0|3
+Elise|엘리스|JUNGLE|AP|0|2|1|0|2
+Evelynn|이블린|JUNGLE|AP|0|1|1|0|2
+Ezreal|이즈리얼|ADC|AD|0|0|0|0|3
+Fiddlesticks|피들스틱|JUNGLE|AP|0|3|3|1|0
+Fiora|피오라|TOP|AD|1|1|0|0|3
+Galio|갈리오|MID,SUPPORT|AP|3|3|3|2|1
+Garen|가렌|TOP|AD|3|1|1|0|1
+Gnar|나르|TOP|AD|2|3|2|1|2
+Gragas|그라가스|JUNGLE,TOP,MID|AP|2|3|3|2|2
+Graves|그레이브즈|JUNGLE|AD|1|0|0|0|2
+Gwen|그웬|TOP|AP|1|0|1|0|2
+Hecarim|헤카림|JUNGLE|AD|2|2|3|0|3
+Irelia|이렐리아|TOP,MID|AD|1|1|1|0|3
+Ivern|아이번|JUNGLE|AP|1|2|0|3|1
+Janna|잔나|SUPPORT|AP|0|3|0|3|1
+JarvanIV|자르반 4세|JUNGLE|AD|2|2|3|1|2
+Jax|잭스|TOP,JUNGLE|AD|2|2|1|0|2
+Jayce|제이스|TOP,MID|AD|0|1|1|0|1
+Jhin|진|ADC|AD|0|2|1|0|0
+Jinx|징크스|ADC|AD|0|1|0|0|0
+Kaisa|카이사|ADC|MIXED|0|0|1|0|2
+Karma|카르마|SUPPORT,MID|AP|0|1|0|3|1
+Karthus|카서스|JUNGLE,MID|AP|0|0|0|0|0
+Kassadin|카사딘|MID|AP|1|0|1|0|3
+Katarina|카타리나|MID|AP|0|0|1|0|3
+Kayle|케일|TOP,MID|MIXED|0|0|0|1|0
+Kayn|케인|JUNGLE|AD|1|1|2|0|3
+Kennen|케넨|TOP,MID|AP|0|3|3|0|1
+Khazix|카직스|JUNGLE|AD|0|1|1|0|3
+Kindred|킨드레드|JUNGLE|AD|0|0|0|1|2
+LeeSin|리 신|JUNGLE|AD|1|2|2|1|3
+Leona|레오나|SUPPORT|AP|3|3|3|2|1
+Lillia|릴리아|JUNGLE|AP|1|2|2|0|3
+Lulu|룰루|SUPPORT|AP|0|2|0|3|0
+Lux|럭스|MID,SUPPORT|AP|0|2|0|1|0
+Malphite|말파이트|TOP|AP|3|3|3|1|0
+Maokai|마오카이|TOP,JUNGLE,SUPPORT|AP|3|3|3|2|1
+MasterYi|마스터 이|JUNGLE|AD|0|0|1|0|3
+Milio|밀리오|SUPPORT|AP|0|1|0|3|0
+MissFortune|미스 포츈|ADC|AD|0|1|0|0|0
+Mordekaiser|모데카이저|TOP|AP|2|1|1|0|0
+Morgana|모르가나|SUPPORT,MID,JUNGLE|AP|0|2|0|3|0
+MonkeyKing|오공|JUNGLE,TOP|AD|2|3|3|0|2
+Nami|나미|SUPPORT|AP|0|3|1|3|0
+Nautilus|노틸러스|SUPPORT,JUNGLE|AP|3|3|3|1|1
+Nidalee|니달리|JUNGLE|AP|0|0|0|1|3
+Nocturne|녹턴|JUNGLE|AD|1|1|3|0|2
+Nunu|누누와 윌럼프|JUNGLE|AP|3|3|3|1|2
+Olaf|올라프|JUNGLE,TOP|AD|2|0|2|0|2
+Orianna|오리아나|MID|AP|0|2|2|2|0
+Ornn|오른|TOP|AP|3|3|3|1|1
+Pantheon|판테온|JUNGLE,MID,TOP,SUPPORT|AD|1|2|2|0|2
+Poppy|뽀삐|JUNGLE,TOP,SUPPORT|AD|3|3|2|3|1
+Pyke|파이크|SUPPORT|AD|0|2|3|0|3
+Qiyana|키아나|MID,JUNGLE|AD|0|2|2|0|3
+Rakan|라칸|SUPPORT|AP|1|3|3|3|3
+Rammus|람머스|JUNGLE|AP|3|3|3|1|2
+RekSai|렉사이|JUNGLE|AD|2|2|3|0|2
+Rell|렐|SUPPORT,JUNGLE|AP|3|3|3|2|1
+Renekton|레넥톤|TOP|AD|2|1|2|0|2
+Rengar|렝가|JUNGLE,TOP|AD|1|1|1|0|3
+Riven|리븐|TOP|AD|1|2|2|0|3
+Rumble|럼블|TOP,JUNGLE|AP|1|1|2|0|0
+Ryze|라이즈|MID,TOP|AP|1|1|0|0|1
+Sejuani|세주아니|JUNGLE|AP|3|3|3|2|2
+Senna|세나|SUPPORT,ADC|AD|0|2|0|2|0
+Seraphine|세라핀|SUPPORT,MID,ADC|AP|0|3|1|3|0
+Shaco|샤코|JUNGLE|MIXED|0|1|1|0|3
+Shen|쉔|TOP,SUPPORT|AP|3|2|2|3|1
+Shyvana|쉬바나|JUNGLE|MIXED|2|1|2|0|2
+Sion|사이온|TOP|AD|3|3|3|0|0
+Sivir|시비르|ADC|AD|0|0|0|1|1
+Skarner|스카너|JUNGLE,TOP|AD|3|3|3|1|1
+Smolder|스몰더|ADC|AD|0|1|0|0|1
+Sona|소나|SUPPORT|AP|0|2|0|3|0
+Soraka|소라카|SUPPORT|AP|0|2|0|3|0
+Swain|스웨인|MID,SUPPORT|AP|2|2|2|1|0
+Sylas|사일러스|MID,JUNGLE|AP|1|2|2|0|2
+Syndra|신드라|MID|AP|0|2|1|0|0
+TahmKench|탐 켄치|SUPPORT,TOP|AP|3|2|1|3|1
+Taliyah|탈리야|JUNGLE,MID|AP|0|3|1|1|1
+Talon|탈론|MID,JUNGLE|AD|0|0|1|0|3
+Taric|타릭|SUPPORT|AP|3|2|1|3|0
+Teemo|티모|TOP|AP|0|1|0|0|1
+Thresh|쓰레쉬|SUPPORT|AP|2|3|2|3|1
+Tristana|트리스타나|ADC,MID|AD|0|1|0|0|2
+Trundle|트런들|JUNGLE,TOP|AD|3|1|1|0|1
+Tryndamere|트린다미어|TOP|AD|1|0|1|0|3
+TwistedFate|트위스티드 페이트|MID|AP|0|2|1|0|0
+Twitch|트위치|ADC|AD|0|0|0|0|1
+Udyr|우디르|JUNGLE,TOP|MIXED|3|2|2|0|2
+Urgot|우르곳|TOP|AD|2|1|1|0|0
+Varus|바루스|ADC|MIXED|0|2|0|0|0
+Vayne|베인|ADC,TOP|AD|0|1|0|0|3
+Veigar|베이가|MID|AP|0|3|1|1|0
+Velkoz|벨코즈|MID,SUPPORT|AP|0|1|0|0|0
+Vex|벡스|MID|AP|0|2|2|1|0
+Vi|바이|JUNGLE|AD|2|3|3|1|2
+Viego|비에고|JUNGLE|AD|1|1|1|0|2
+Viktor|빅토르|MID|AP|0|1|0|0|0
+Vladimir|블라디미르|MID,TOP|AP|1|0|0|0|2
+Volibear|볼리베어|JUNGLE,TOP|MIXED|3|2|2|0|2
+Warwick|워윅|JUNGLE,TOP|MIXED|2|2|2|0|2
+Xayah|자야|ADC|AD|0|1|0|0|1
+XinZhao|신 짜오|JUNGLE|AD|2|2|2|0|2
+Yasuo|야스오|MID,TOP|AD|0|1|1|0|3
+Yone|요네|MID,TOP|AD|1|2|2|0|3
+Yorick|요릭|TOP|AD|2|0|1|0|0
+Yuumi|유미|SUPPORT|AP|0|1|0|3|0
+Zac|자크|JUNGLE,TOP|AP|3|3|3|2|2
+Zed|제드|MID|AD|0|0|1|0|3
+Zeri|제리|ADC|AD|0|0|0|0|3
+Ziggs|직스|MID,ADC|AP|0|1|0|0|0
+Zilean|질리언|SUPPORT,MID|AP|0|2|0|3|1
+Zoe|조이|MID|AP|0|2|0|0|1
+Zyra|자이라|JUNGLE,SUPPORT|AP|0|3|0|2|0
+'''
+out=[]
+for line in raw.strip().splitlines():
+  p=line.split('|')
+  assert len(p)==9,(line,len(p))
+  champ_id,name,roles,damage,*vals=p
+  tank,cc,engage,peel,mobility=map(int,vals)
+  out.append(dict(id=champ_id,name=name,roles=roles.split(','),damage=damage,tank=tank,cc=cc,engage=engage,peel=peel,mobility=mobility))
+Path(__file__).with_name('champions.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+print('Created',len(out))
