@@ -43,7 +43,7 @@ createApp({
     const selectedPick=computed(()=>result.value?.recommendations.find(c=>c.id===selectedId.value)||null);
     const filteredChampions=computed(()=>champions.value.filter(c=>
       (filterRole.value==='ALL'||c.roles.includes(filterRole.value)) &&
-      (c.name.toLowerCase().includes(query.value.trim().toLowerCase())||c.id.toLowerCase().includes(query.value.trim().toLowerCase()))));
+      (c.name.toLowerCase().includes(query.value.trim().toLowerCase())||c.id.toLowerCase().includes(query.value.trim().toLowerCase()))).sort((a,b)=>a.name.localeCompare(b.name,'ko-KR')));
     const name=id=>champMap.value[id]?.name??id;
     const explanationLabel=mode=>({openai:'AI 근거선택 · 검증 문장',fallback_invalid_explanation:'검증 실패 · 규칙 설명',fallback_legacy_unverified:'이전 설명 보호 · 규칙 설명',fallback_openai_error:'연결 오류 · 규칙 설명',demo_no_api_key:'API 미설정 · 규칙 설명',rules_no_candidates:'후보 없음 · 규칙 설명'}[mode]||'규칙 설명');
     const roleName=id=>roles.find(r=>r.id===id)?.label||id;
