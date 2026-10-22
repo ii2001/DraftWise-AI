@@ -5,9 +5,13 @@
   "slide_count": 8,
   "aspect_ratio": "16:9",
   "content_modified_slides": [
+    1,
+    2,
     3,
+    4,
     5,
-    6
+    6,
+    8
   ],
   "architecture_and_comparison_graph_unchanged": true,
   "notes_target_seconds": 285,
@@ -101,7 +105,37 @@
     }
   ],
   "renderer": "LibreOffice 26.8.1 headless PDF export; PyMuPDF PNG rendering",
+  "unmodified_slides_pixel_identical_to_original": [
+    7
+  ],
+  "pdf_font_family": "Noto Sans CJK KR (embedded subsets)",
+  "output_sha256": "b96b403fcd3e6b9df3b5a0b5fba424430052fa6f067164348b0ee7b5fd40d3b6",
+  "cleanup_source_commit": "f744513874155d906e25771ae556b2fab22b2e95",
+  "cleanup_source_sha256": "dcc0d25ded151557947dc70d848105f4584558e6b63a72b4115cd6bc8630738d",
+  "cleanup_modified_slides": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8
+  ],
+  "removed_content": [
+    "교육생 번호 기입란",
+    "제출 자료 체크리스트",
+    "ZIP 조건·제출 포털 안내",
+    "제출·Zoom 일정",
+    "반복 안내 문구"
+  ],
   "rendered_slide_count": 8,
+  "all_native_text_present_in_pdf": true,
+  "edited_slides_text_present_in_pdf": true,
+  "edited_slides_text_boxes_do_not_overlap_images": true,
+  "removed_phrases_absent_from_pdf": true,
+  "editable_native_text_shapes": 116,
+  "no_presentation_edit_password_or_text_selection_lock": true,
+  "pdf_sha256": "0b0abb85788d577d5a05dd14cc577ad3f45ebe7fe81c42ca18f5dd38e7ece610",
   "visually_reviewed_slides": [
     1,
     2,
@@ -111,17 +145,5 @@
     6,
     7,
     8
-  ],
-  "unmodified_slides_pixel_identical_to_original": [
-    1,
-    2,
-    4,
-    7,
-    8
-  ],
-  "edited_slides_text_present_in_pdf": true,
-  "edited_slides_text_boxes_do_not_overlap_images": true,
-  "pdf_font_family": "Noto Sans CJK KR (embedded subsets)",
-  "output_sha256": "dcc0d25ded151557947dc70d848105f4584558e6b63a72b4115cd6bc8630738d",
-  "pdf_sha256": "9f03346810699cc1ab0aa4db284c022d3fda4bd9fbb02eb4604aa1b273eb2cd3"
+  ]
 }
