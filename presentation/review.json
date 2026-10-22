@@ -1,0 +1,127 @@
+{
+  "source": "docs/evidence/presentation/DraftWise_AI_5min_presentation.pptx",
+  "source_sha256": "65d2e022030b1c183238f9ca6aedbc7a2cd33127bd699f71d596623d050c921b",
+  "output": "presentation/DraftWise_AI_5min_FINAL.pptx",
+  "slide_count": 8,
+  "aspect_ratio": "16:9",
+  "content_modified_slides": [
+    3,
+    5,
+    6
+  ],
+  "architecture_and_comparison_graph_unchanged": true,
+  "notes_target_seconds": 285,
+  "actual_rehearsal_measured": false,
+  "all_embedded_images_match_original_bytes": true,
+  "insertions": [
+    {
+      "slide": 3,
+      "source": "docs/evidence/2026-10-22-grounding-fix/screenshots/01-draft-desktop.png",
+      "source_sha256": "611a21b307c8b8ec279e92d32aa98c1dab44ac0a21388560380039c90ff76130",
+      "visible_region_px": [
+        42,
+        220,
+        1398,
+        1138
+      ],
+      "bounds_inches": [
+        0.72,
+        2.5,
+        6.58,
+        4.454601769911505
+      ]
+    },
+    {
+      "slide": 3,
+      "source": "docs/evidence/2026-10-22-grounding-fix/screenshots/02-role-and-pool.png",
+      "source_sha256": "bc9427520739ef91de89c15221ad094c26437c114a0e63461bfe6e5e3cf027e8",
+      "visible_region_px": [
+        367,
+        327,
+        1073,
+        1053
+      ],
+      "bounds_inches": [
+        7.62,
+        2.5,
+        4.08,
+        4.195580736543909
+      ]
+    },
+    {
+      "slide": 5,
+      "source": "docs/evidence/2026-10-22-grounding-fix/screenshots/04-real-ai-analysis.png",
+      "source_sha256": "6102e800dc46e980870b16c6a4269a7697d3104df84408a090aa171a8307e5dd",
+      "visible_region_px": [
+        0,
+        168,
+        1356,
+        511
+      ],
+      "bounds_inches": [
+        0.72,
+        2.16,
+        11.9,
+        3.0101032448377585
+      ]
+    },
+    {
+      "slide": 5,
+      "source": "docs/evidence/2026-10-22-grounding-fix/screenshots/05-composition-comparison.png",
+      "source_sha256": "4898acad796053eabd0bf9f1bed8230cedd0276941c9ce52f255845e4e1ac832",
+      "visible_region_px": [
+        0,
+        98,
+        1356,
+        213
+      ],
+      "bounds_inches": [
+        0.72,
+        5.76,
+        11.9,
+        1.0092182890855457
+      ]
+    },
+    {
+      "slide": 6,
+      "source": "docs/evidence/2026-10-22-grounding-fix/screenshots/06-history.png",
+      "source_sha256": "2a6930676dcd4853ddad30d67b1342c1c36391b7601b7bb011318c3c6d754bf6",
+      "visible_region_px": [
+        0,
+        0,
+        1356,
+        168
+      ],
+      "bounds_inches": [
+        0.73,
+        4.92,
+        11.88,
+        1.471858407079646
+      ]
+    }
+  ],
+  "renderer": "LibreOffice 26.8.1 headless PDF export; PyMuPDF PNG rendering",
+  "rendered_slide_count": 8,
+  "visually_reviewed_slides": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "unmodified_slides_pixel_identical_to_original": [
+    1,
+    2,
+    4,
+    7,
+    8
+  ],
+  "edited_slides_text_present_in_pdf": true,
+  "edited_slides_text_boxes_do_not_overlap_images": true,
+  "pdf_font_family": "Noto Sans CJK KR (embedded subsets)",
+  "output_sha256": "dcc0d25ded151557947dc70d848105f4584558e6b63a72b4115cd6bc8630738d",
+  "pdf_sha256": "9f03346810699cc1ab0aa4db284c022d3fda4bd9fbb02eb4604aa1b273eb2cd3"
+}
