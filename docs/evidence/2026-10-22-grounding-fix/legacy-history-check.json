@@ -1,0 +1,214 @@
+{
+  "checked_at": "2026-10-22T01:46:39.900Z",
+  "passed": true,
+  "source": "actual prior submission session, existing isolated SQLite database",
+  "replaced_record_count": 5,
+  "old_error": "밴된 자크를 제외하고는",
+  "result": {
+    "recommendations": [
+      {
+        "id": "Zac",
+        "name": "자크",
+        "role": "JUNGLE",
+        "damage": "AP",
+        "score": 86.8,
+        "breakdown": {
+          "comfort": 95,
+          "team": 97,
+          "enemy": 50,
+          "position": 85
+        },
+        "reasons": [
+          "직접 등록한 숙련 챔피언",
+          "정글: 먼저 진입해 교전 개시",
+          "정글: CC를 활용한 갱킹 연계",
+          "AD 편중을 보완하는 AP 피해"
+        ],
+        "composition_after": {
+          "ad": 2,
+          "ap": 1,
+          "frontline": 1,
+          "hard_cc": 1,
+          "engage": 1,
+          "peel": 1,
+          "flags": [
+            "뚜렷한 조합 결함 없음 또는 입력 부족"
+          ]
+        }
+      },
+      {
+        "id": "Gragas",
+        "name": "그라가스",
+        "role": "JUNGLE",
+        "damage": "AP",
+        "score": 68.8,
+        "breakdown": {
+          "comfort": 50,
+          "team": 97,
+          "enemy": 50,
+          "position": 85
+        },
+        "reasons": [
+          "정글: 먼저 진입해 교전 개시",
+          "정글: CC를 활용한 갱킹 연계",
+          "AD 편중을 보완하는 AP 피해",
+          "부족한 앞라인 보완"
+        ],
+        "composition_after": {
+          "ad": 2,
+          "ap": 1,
+          "frontline": 1,
+          "hard_cc": 1,
+          "engage": 1,
+          "peel": 1,
+          "flags": [
+            "뚜렷한 조합 결함 없음 또는 입력 부족"
+          ]
+        }
+      },
+      {
+        "id": "Nautilus",
+        "name": "노틸러스",
+        "role": "JUNGLE",
+        "damage": "AP",
+        "score": 68.8,
+        "breakdown": {
+          "comfort": 50,
+          "team": 97,
+          "enemy": 50,
+          "position": 85
+        },
+        "reasons": [
+          "정글: 먼저 진입해 교전 개시",
+          "정글: CC를 활용한 갱킹 연계",
+          "AD 편중을 보완하는 AP 피해",
+          "부족한 앞라인 보완"
+        ],
+        "composition_after": {
+          "ad": 2,
+          "ap": 1,
+          "frontline": 1,
+          "hard_cc": 1,
+          "engage": 1,
+          "peel": 0,
+          "flags": [
+            "뚜렷한 조합 결함 없음 또는 입력 부족"
+          ]
+        }
+      },
+      {
+        "id": "Nunu",
+        "name": "누누와 윌럼프",
+        "role": "JUNGLE",
+        "damage": "AP",
+        "score": 68.8,
+        "breakdown": {
+          "comfort": 50,
+          "team": 97,
+          "enemy": 50,
+          "position": 85
+        },
+        "reasons": [
+          "정글: 먼저 진입해 교전 개시",
+          "정글: CC를 활용한 갱킹 연계",
+          "AD 편중을 보완하는 AP 피해",
+          "부족한 앞라인 보완"
+        ],
+        "composition_after": {
+          "ad": 2,
+          "ap": 1,
+          "frontline": 1,
+          "hard_cc": 1,
+          "engage": 1,
+          "peel": 0,
+          "flags": [
+            "뚜렷한 조합 결함 없음 또는 입력 부족"
+          ]
+        }
+      },
+      {
+        "id": "Rammus",
+        "name": "람머스",
+        "role": "JUNGLE",
+        "damage": "AP",
+        "score": 68.8,
+        "breakdown": {
+          "comfort": 50,
+          "team": 97,
+          "enemy": 50,
+          "position": 85
+        },
+        "reasons": [
+          "정글: 먼저 진입해 교전 개시",
+          "정글: CC를 활용한 갱킹 연계",
+          "AD 편중을 보완하는 AP 피해",
+          "부족한 앞라인 보완"
+        ],
+        "composition_after": {
+          "ad": 2,
+          "ap": 1,
+          "frontline": 1,
+          "hard_cc": 1,
+          "engage": 1,
+          "peel": 0,
+          "flags": [
+            "뚜렷한 조합 결함 없음 또는 입력 부족"
+          ]
+        }
+      }
+    ],
+    "bans": [
+      {
+        "id": "Gragas",
+        "name": "그라가스",
+        "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+      },
+      {
+        "id": "Hecarim",
+        "name": "헤카림",
+        "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+      },
+      {
+        "id": "MonkeyKing",
+        "name": "오공",
+        "reason": "진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)"
+      }
+    ],
+    "team": {
+      "ad": 2,
+      "ap": 0,
+      "frontline": 0,
+      "hard_cc": 0,
+      "engage": 0,
+      "peel": 0,
+      "flags": [
+        "아군 물리 피해 편중",
+        "아군 앞라인 부족",
+        "아군 CC 부족"
+      ]
+    },
+    "role_focus": "정글 · 진입과 CC를 통한 교전 개시",
+    "weights": {
+      "comfort": 0.4,
+      "team": 0.4,
+      "enemy": 0.2
+    },
+    "considered": 55,
+    "data_quality": "curated_demo",
+    "explanation": "현재 분석: 아군 물리 피해 편중 / 아군 앞라인 부족 / 아군 CC 부족. 1순위는 자크(86.8점)입니다. 추천 근거: 직접 등록한 숙련 챔피언; 정글: 먼저 진입해 교전 개시; 정글: CC를 활용한 갱킹 연계; AD 편중을 보완하는 AP 피해. 점수는 학습용 휴리스틱으로 계산했으며 실제 승률 예측이 아닙니다.",
+    "trace": [
+      "validate_input",
+      "mcp_retrieve",
+      "rule_scoring",
+      "llm_explanation"
+    ],
+    "llm_mode": "fallback_legacy_unverified",
+    "mcp_mode": "mcp_stdio",
+    "graph_mode": "langgraph",
+    "latency_ms": 2892,
+    "explanation_policy": "validated_evidence_v1"
+  },
+  "screenshot": "screenshots/10-legacy-history-protected.png",
+  "page_errors": [],
+  "additional_model_calls": 0
+}

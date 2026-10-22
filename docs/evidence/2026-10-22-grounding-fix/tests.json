@@ -1,0 +1,52 @@
+{
+  "started_from_commit": "4c641e30657c54d8446535e74e0d51b7734b9f89",
+  "python": "3.12.13",
+  "node": "v26.5.0",
+  "counts": {
+    "python": 43,
+    "node": 8
+  },
+  "runs": [
+    {
+      "name": "python-tests",
+      "started_at": "2026-10-22T10:45:39.340054+09:00",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7301876670098864
+    },
+    {
+      "name": "node-tests",
+      "started_at": "2026-10-22T10:45:40.070758+09:00",
+      "command": [
+        "node",
+        "--test",
+        "tests/test_draft_ui.cjs"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.1753900409967173
+    },
+    {
+      "name": "prompt-context",
+      "started_at": "2026-10-22T10:45:40.246533+09:00",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.verify_prompt_context"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.23311258302419446
+    }
+  ],
+  "source_hashes": {
+    "app/llm.py": "b4a392e04c6b67d8352e7ef6f2a8be5b48167ed2ea75f5577670ef3fb434d537",
+    "app/agent.py": "ba47cb2f55597f70618553591129a9e7ae24961c68b3eb2e536dab3bfbe38408",
+    "app/storage.py": "4ca68e9e4ad6309decdd4a00d8a974cf86121219dcdd56db6a30072589efd594",
+    "static/app.js": "f86e5520f3ec46901fd7e7081177aa4cc6b39f46fd462159e6507067d0585324",
+    "static/index.html": "61d1fe37253348c55116f3f87ec3a373ae78dd088e99d40100d11acdaa061802"
+  }
+}

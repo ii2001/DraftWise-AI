@@ -1,0 +1,53 @@
+{
+  "scope": "Current rendered API explanations checked against allowed server-owned names, scores and reasons; no general semantic-accuracy claim",
+  "policy": "validated_evidence_v1",
+  "new_real_outputs": [
+    {
+      "title": "AD 편중 / AP 정글 요청",
+      "confirmed_bans": [],
+      "explanation": "1순위 자크(86.8점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n2순위 에코(83.3점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n3순위 자이라(78.5점). 근거: 정글: CC를 활용한 갱킹 연계 / 군중 제어기 보강.\n점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.",
+      "policy": "validated_evidence_v1",
+      "mode": "openai",
+      "observation": "Only provided candidate names, scores and reasons plus fixed disclaimers; no claim that unbanned Zac is banned"
+    },
+    {
+      "title": "앞라인 부재",
+      "confirmed_bans": [],
+      "explanation": "1순위 자크(86.3점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n2순위 그라가스(77.3점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n3순위 노틸러스(77.3점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.",
+      "policy": "validated_evidence_v1",
+      "mode": "openai",
+      "observation": "Only provided candidate names, scores and reasons plus fixed disclaimers; no claim that unbanned Zac is banned"
+    },
+    {
+      "title": "AP 편중 / AD 정글 요청",
+      "confirmed_bans": [],
+      "explanation": "1순위 바이(83.9점). 근거: 정글: 먼저 진입해 교전 개시 / AP 편중을 보완하는 AD 피해.\n2순위 렉사이(74.9점). 근거: 정글: CC를 활용한 갱킹 연계 / AP 편중을 보완하는 AD 피해.\n3순위 브라이어(74.9점). 근거: 정글: CC를 활용한 갱킹 연계 / AP 편중을 보완하는 AD 피해.\n점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.",
+      "policy": "validated_evidence_v1",
+      "mode": "openai",
+      "observation": "Only provided candidate names, scores and reasons plus fixed disclaimers; no claim that unbanned Zac is banned"
+    },
+    {
+      "title": "밴 제한",
+      "confirmed_bans": [
+        "Zyra",
+        "Ekko"
+      ],
+      "explanation": "1순위 자크(86.8점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n2순위 그라가스(68.8점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n3순위 노틸러스(68.8점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.",
+      "policy": "validated_evidence_v1",
+      "mode": "openai",
+      "observation": "Only provided candidate names, scores and reasons plus fixed disclaimers; no claim that unbanned Zac is banned"
+    },
+    {
+      "title": "UI analysis",
+      "confirmed_bans": [],
+      "explanation": "1순위 자크(86.8점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n2순위 에코(83.3점). 근거: 정글: 먼저 진입해 교전 개시 / 정글: CC를 활용한 갱킹 연계.\n3순위 자이라(78.5점). 근거: 정글: CC를 활용한 갱킹 연계 / 군중 제어기 보강.\n점수는 교육용 규칙 평가이며 실제 승률 예측이 아닙니다.",
+      "policy": "validated_evidence_v1",
+      "mode": "openai",
+      "observation": "Only provided candidate names, scores and reasons plus fixed disclaimers; no claim that unbanned Zac is banned"
+    }
+  ],
+  "historical_failure": "../2026-10-22/explanation-review.json",
+  "offline_replay": "tests/test_llm.py::test_replay_all_five_original_real_model_outputs_is_safe",
+  "legacy_protection": "legacy-history-check.json",
+  "tradeoff": "No freeform strategy answers; model selects supplied evidence only"
+}

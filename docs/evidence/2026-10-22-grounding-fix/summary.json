@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-10-22T10:52:03.044912+09:00",
+  "app_commit": "4fd0392a5328fcea11657f732ad7c6d757c364cb",
+  "python_passed": 43,
+  "node_passed": 8,
+  "browser_checks_passed": 12,
+  "browser_page_errors": [],
+  "new_real_model_calls": 5,
+  "total_submission_real_model_calls": 15,
+  "grounded_contract_passed": 5,
+  "integration_http_mean_ms": 1443.9727187491371,
+  "ui_http_wall_ms": 1308.1032500000001,
+  "legacy_history_records_protected": 5,
+  "old_output_replay_count": 5,
+  "old_output_replay_kind": "offline regression test, not real API calls",
+  "source_hashes_verified": true,
+  "limitations": [
+    "No general semantic-accuracy or actual-game win-rate measurement",
+    "Freeform strategy answers replaced with selection of supplied reasons",
+    "No new scoring benchmark: scoring code unchanged; previous recorded benchmark retained"
+  ]
+}

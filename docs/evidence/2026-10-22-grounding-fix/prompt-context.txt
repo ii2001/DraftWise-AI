@@ -1,0 +1,8 @@
+Started: 2026-10-22T10:45:40.246533+09:00
+Command: .venv/bin/python -m scripts.verify_prompt_context
+Exit: 0
+Wall seconds: 0.233113
+
+PASS: confirmed/suggested bans separated, input unchanged; confirmed_bans= []
+PASS: confirmed/suggested bans separated, input unchanged; confirmed_bans= ['Zyra', 'Ekko']
+This is a mocked, offline regression check; it does not prove a real OpenAI call.
