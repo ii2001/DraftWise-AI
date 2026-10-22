@@ -40,6 +40,20 @@
     "mobility": 3
   },
   {
+    "id": "Akshan",
+    "name": "아크샨",
+    "roles": [
+      "MID",
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 0,
+    "engage": 1,
+    "peel": 1,
+    "mobility": 3
+  },
+  {
     "id": "Alistar",
     "name": "알리스타",
     "roles": [
@@ -51,6 +65,19 @@
     "engage": 3,
     "peel": 3,
     "mobility": 1
+  },
+  {
+    "id": "Ambessa",
+    "name": "암베사",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 2,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 3
   },
   {
     "id": "Amumu",
@@ -65,6 +92,19 @@
     "engage": 3,
     "peel": 1,
     "mobility": 1
+  },
+  {
+    "id": "Anivia",
+    "name": "애니비아",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 0,
+    "peel": 2,
+    "mobility": 0
   },
   {
     "id": "Annie",
@@ -106,6 +146,33 @@
     "engage": 1,
     "peel": 2,
     "mobility": 0
+  },
+  {
+    "id": "AurelionSol",
+    "name": "아우렐리온 솔",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 1,
+    "peel": 0,
+    "mobility": 2
+  },
+  {
+    "id": "Aurora",
+    "name": "오로라",
+    "roles": [
+      "MID",
+      "TOP"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 1,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 3
   },
   {
     "id": "Azir",
@@ -188,6 +255,19 @@
     "mobility": 1
   },
   {
+    "id": "Briar",
+    "name": "브라이어",
+    "roles": [
+      "JUNGLE"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 2,
+    "engage": 3,
+    "peel": 0,
+    "mobility": 2
+  },
+  {
     "id": "Caitlyn",
     "name": "케이틀린",
     "roles": [
@@ -241,6 +321,20 @@
     "mobility": 0
   },
   {
+    "id": "Corki",
+    "name": "코르키",
+    "roles": [
+      "ADC",
+      "MID"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 2
+  },
+  {
     "id": "Darius",
     "name": "다리우스",
     "roles": [
@@ -279,6 +373,19 @@
     "engage": 0,
     "peel": 0,
     "mobility": 0
+  },
+  {
+    "id": "DrMundo",
+    "name": "문도 박사",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 3,
+    "cc": 0,
+    "engage": 1,
+    "peel": 0,
+    "mobility": 1
   },
   {
     "id": "Ekko",
@@ -360,6 +467,19 @@
     "mobility": 3
   },
   {
+    "id": "Fizz",
+    "name": "피즈",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 3
+  },
+  {
     "id": "Galio",
     "name": "갈리오",
     "roles": [
@@ -371,6 +491,19 @@
     "cc": 3,
     "engage": 3,
     "peel": 2,
+    "mobility": 1
+  },
+  {
+    "id": "Gangplank",
+    "name": "갱플랭크",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 1,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
     "mobility": 1
   },
   {
@@ -452,6 +585,48 @@
     "engage": 3,
     "peel": 0,
     "mobility": 3
+  },
+  {
+    "id": "Heimerdinger",
+    "name": "하이머딩거",
+    "roles": [
+      "TOP",
+      "MID",
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 0,
+    "peel": 2,
+    "mobility": 0
+  },
+  {
+    "id": "Hwei",
+    "name": "흐웨이",
+    "roles": [
+      "MID",
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 1,
+    "peel": 2,
+    "mobility": 0
+  },
+  {
+    "id": "Illaoi",
+    "name": "일라오이",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 0
   },
   {
     "id": "Irelia",
@@ -572,6 +747,19 @@
     "engage": 1,
     "peel": 0,
     "mobility": 2
+  },
+  {
+    "id": "Kalista",
+    "name": "칼리스타",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 2,
+    "engage": 2,
+    "peel": 2,
+    "mobility": 3
   },
   {
     "id": "Karma",
@@ -695,6 +883,58 @@
     "mobility": 2
   },
   {
+    "id": "Kled",
+    "name": "클레드",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 2,
+    "engage": 3,
+    "peel": 0,
+    "mobility": 2
+  },
+  {
+    "id": "KogMaw",
+    "name": "코그모",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "MIXED",
+    "tank": 0,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 0
+  },
+  {
+    "id": "KSante",
+    "name": "크산테",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 3,
+    "cc": 3,
+    "engage": 2,
+    "peel": 2,
+    "mobility": 2
+  },
+  {
+    "id": "Leblanc",
+    "name": "르블랑",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 1,
+    "engage": 1,
+    "peel": 0,
+    "mobility": 3
+  },
+  {
     "id": "LeeSin",
     "name": "리 신",
     "roles": [
@@ -732,6 +972,45 @@
     "engage": 2,
     "peel": 0,
     "mobility": 3
+  },
+  {
+    "id": "Lissandra",
+    "name": "리산드라",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 1,
+    "cc": 3,
+    "engage": 3,
+    "peel": 1,
+    "mobility": 2
+  },
+  {
+    "id": "Locke",
+    "name": "로크",
+    "roles": [
+      "JUNGLE"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 1,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 3
+  },
+  {
+    "id": "Lucian",
+    "name": "루시안",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 2
   },
   {
     "id": "Lulu",
@@ -774,6 +1053,19 @@
     "mobility": 0
   },
   {
+    "id": "Malzahar",
+    "name": "말자하",
+    "roles": [
+      "MID"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 3,
+    "engage": 1,
+    "peel": 0,
+    "mobility": 0
+  },
+  {
     "id": "Maokai",
     "name": "마오카이",
     "roles": [
@@ -802,6 +1094,20 @@
     "mobility": 3
   },
   {
+    "id": "Mel",
+    "name": "멜",
+    "roles": [
+      "MID",
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 0,
+    "peel": 2,
+    "mobility": 1
+  },
+  {
     "id": "Milio",
     "name": "밀리오",
     "roles": [
@@ -826,6 +1132,20 @@
     "engage": 0,
     "peel": 0,
     "mobility": 0
+  },
+  {
+    "id": "MonkeyKing",
+    "name": "오공",
+    "roles": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 3,
+    "engage": 3,
+    "peel": 0,
+    "mobility": 2
   },
   {
     "id": "Mordekaiser",
@@ -856,18 +1176,18 @@
     "mobility": 0
   },
   {
-    "id": "MonkeyKing",
-    "name": "오공",
+    "id": "Naafiri",
+    "name": "나피리",
     "roles": [
-      "JUNGLE",
-      "TOP"
+      "MID",
+      "JUNGLE"
     ],
     "damage": "AD",
-    "tank": 2,
-    "cc": 3,
-    "engage": 3,
+    "tank": 0,
+    "cc": 0,
+    "engage": 2,
     "peel": 0,
-    "mobility": 2
+    "mobility": 3
   },
   {
     "id": "Nami",
@@ -880,6 +1200,19 @@
     "cc": 3,
     "engage": 1,
     "peel": 3,
+    "mobility": 0
+  },
+  {
+    "id": "Nasus",
+    "name": "나서스",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 3,
+    "cc": 0,
+    "engage": 1,
+    "peel": 0,
     "mobility": 0
   },
   {
@@ -897,6 +1230,20 @@
     "mobility": 1
   },
   {
+    "id": "Neeko",
+    "name": "니코",
+    "roles": [
+      "MID",
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 3,
+    "engage": 3,
+    "peel": 1,
+    "mobility": 1
+  },
+  {
     "id": "Nidalee",
     "name": "니달리",
     "roles": [
@@ -908,6 +1255,19 @@
     "engage": 0,
     "peel": 1,
     "mobility": 3
+  },
+  {
+    "id": "Nilah",
+    "name": "닐라",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "AD",
+    "tank": 1,
+    "cc": 2,
+    "engage": 2,
+    "peel": 1,
+    "mobility": 2
   },
   {
     "id": "Nocturne",
@@ -1034,6 +1394,19 @@
     "mobility": 3
   },
   {
+    "id": "Quinn",
+    "name": "퀸",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 1,
+    "engage": 1,
+    "peel": 0,
+    "mobility": 3
+  },
+  {
     "id": "Rakan",
     "name": "라칸",
     "roles": [
@@ -1085,6 +1458,19 @@
     "engage": 3,
     "peel": 2,
     "mobility": 1
+  },
+  {
+    "id": "Renata",
+    "name": "레나타 글라스크",
+    "roles": [
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 3,
+    "engage": 1,
+    "peel": 3,
+    "mobility": 0
   },
   {
     "id": "Renekton",
@@ -1155,6 +1541,19 @@
     "mobility": 1
   },
   {
+    "id": "Samira",
+    "name": "사미라",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 0,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 3
+  },
+  {
     "id": "Sejuani",
     "name": "세주아니",
     "roles": [
@@ -1197,6 +1596,19 @@
     "mobility": 0
   },
   {
+    "id": "Sett",
+    "name": "세트",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AD",
+    "tank": 3,
+    "cc": 2,
+    "engage": 2,
+    "peel": 1,
+    "mobility": 0
+  },
+  {
     "id": "Shaco",
     "name": "샤코",
     "roles": [
@@ -1234,6 +1646,19 @@
     "cc": 1,
     "engage": 2,
     "peel": 0,
+    "mobility": 2
+  },
+  {
+    "id": "Singed",
+    "name": "신지드",
+    "roles": [
+      "TOP"
+    ],
+    "damage": "AP",
+    "tank": 3,
+    "cc": 2,
+    "engage": 2,
+    "peel": 1,
     "mobility": 2
   },
   {
@@ -1693,6 +2118,20 @@
     "mobility": 1
   },
   {
+    "id": "Xerath",
+    "name": "제라스",
+    "roles": [
+      "MID",
+      "SUPPORT"
+    ],
+    "damage": "AP",
+    "tank": 0,
+    "cc": 2,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 0
+  },
+  {
     "id": "XinZhao",
     "name": "신 짜오",
     "roles": [
@@ -1747,6 +2186,19 @@
     "mobility": 0
   },
   {
+    "id": "Yunara",
+    "name": "유나라",
+    "roles": [
+      "ADC"
+    ],
+    "damage": "AD",
+    "tank": 0,
+    "cc": 0,
+    "engage": 0,
+    "peel": 0,
+    "mobility": 2
+  },
+  {
     "id": "Yuumi",
     "name": "유미",
     "roles": [
@@ -1758,6 +2210,20 @@
     "engage": 0,
     "peel": 3,
     "mobility": 0
+  },
+  {
+    "id": "Zaahen",
+    "name": "자헨",
+    "roles": [
+      "TOP",
+      "JUNGLE"
+    ],
+    "damage": "AD",
+    "tank": 2,
+    "cc": 2,
+    "engage": 2,
+    "peel": 0,
+    "mobility": 2
   },
   {
     "id": "Zac",

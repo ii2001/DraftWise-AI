@@ -13,7 +13,9 @@ def test_api_health_catalog_and_analysis(monkeypatch):
             m.setattr('app.main.riot_latest_version', lambda:'16.18.1')
             res=client.get('/api/champions')
         assert res.status_code==200
-        assert len(res.json()['champions'])>=100
+        roster=res.json()['champions']
+        assert len(roster)==173
+        assert {'Nasus','Leblanc','Hwei','Yunara','Zaahen','Locke'} <= {c['id'] for c in roster}
         resp=client.post('/api/analyze',json={
             'role':'JUNGLE','allies':['Yasuo','Jinx'],'enemies':['LeeSin','Ahri'],
             'pool':['Zyra','Ekko','Zac']})

@@ -1,41 +1,57 @@
 import json
 from pathlib import Path
+# Roster IDs/names checked against Riot Data Dragon 16.21.1 (173 champions).
+# https://ddragon.leagueoflegends.com/cdn/16.21.1/data/ko_KR/champion.json
+# Roles and 0–3 trait scores are curated educational estimates, not Riot statistics.
 # id, Korean label, roles, damage, tankiness, hard CC, engage, peel, mobility
 raw = '''
 Aatrox|아트록스|TOP|AD|2|1|1|0|1
 Ahri|아리|MID|AP|0|2|1|1|3
 Akali|아칼리|MID,TOP|AP|0|0|1|0|3
+Akshan|아크샨|MID,TOP|AD|0|0|1|1|3
 Alistar|알리스타|SUPPORT|AP|3|3|3|3|1
+Ambessa|암베사|TOP|AD|2|2|2|0|3
 Amumu|아무무|JUNGLE,SUPPORT|AP|3|3|3|1|1
+Anivia|애니비아|MID|AP|0|2|0|2|0
 Annie|애니|MID,SUPPORT|AP|0|3|2|1|0
 Aphelios|아펠리오스|ADC|AD|0|1|0|0|0
 Ashe|애쉬|ADC,SUPPORT|AD|0|3|1|2|0
+AurelionSol|아우렐리온 솔|MID|AP|0|2|1|0|2
+Aurora|오로라|MID,TOP|AP|0|1|2|0|3
 Azir|아지르|MID|AP|0|1|1|1|1
 Bard|바드|SUPPORT|AP|0|3|2|2|2
 Belveth|벨베스|JUNGLE|AD|1|1|1|0|3
 Blitzcrank|블리츠크랭크|SUPPORT|AP|2|3|3|1|0
 Brand|브랜드|MID,SUPPORT,JUNGLE|AP|0|1|0|0|0
 Braum|브라움|SUPPORT|AP|3|2|1|3|1
+Briar|브라이어|JUNGLE|AD|2|2|3|0|2
 Caitlyn|케이틀린|ADC|AD|0|1|0|0|1
 Camille|카밀|TOP|AD|2|2|2|0|3
 Cassiopeia|카시오페아|MID|AP|0|1|0|0|0
 Chogath|초가스|TOP,MID|AP|3|2|2|1|0
+Corki|코르키|ADC,MID|AD|0|0|0|0|2
 Darius|다리우스|TOP|AD|2|1|1|0|0
 Diana|다이애나|JUNGLE,MID|AP|1|2|3|0|2
 Draven|드레이븐|ADC|AD|0|1|0|0|0
+DrMundo|문도 박사|TOP|AD|3|0|1|0|1
 Ekko|에코|JUNGLE,MID|AP|0|2|2|0|3
 Elise|엘리스|JUNGLE|AP|0|2|1|0|2
 Evelynn|이블린|JUNGLE|AP|0|1|1|0|2
 Ezreal|이즈리얼|ADC|AD|0|0|0|0|3
 Fiddlesticks|피들스틱|JUNGLE|AP|0|3|3|1|0
 Fiora|피오라|TOP|AD|1|1|0|0|3
+Fizz|피즈|MID|AP|0|2|2|0|3
 Galio|갈리오|MID,SUPPORT|AP|3|3|3|2|1
+Gangplank|갱플랭크|TOP|AD|1|0|0|0|1
 Garen|가렌|TOP|AD|3|1|1|0|1
 Gnar|나르|TOP|AD|2|3|2|1|2
 Gragas|그라가스|JUNGLE,TOP,MID|AP|2|3|3|2|2
 Graves|그레이브즈|JUNGLE|AD|1|0|0|0|2
 Gwen|그웬|TOP|AP|1|0|1|0|2
 Hecarim|헤카림|JUNGLE|AD|2|2|3|0|3
+Heimerdinger|하이머딩거|TOP,MID,SUPPORT|AP|0|2|0|2|0
+Hwei|흐웨이|MID,SUPPORT|AP|0|2|1|2|0
+Illaoi|일라오이|TOP|AD|2|0|0|0|0
 Irelia|이렐리아|TOP,MID|AD|1|1|1|0|3
 Ivern|아이번|JUNGLE|AP|1|2|0|3|1
 Janna|잔나|SUPPORT|AP|0|3|0|3|1
@@ -45,6 +61,7 @@ Jayce|제이스|TOP,MID|AD|0|1|1|0|1
 Jhin|진|ADC|AD|0|2|1|0|0
 Jinx|징크스|ADC|AD|0|1|0|0|0
 Kaisa|카이사|ADC|MIXED|0|0|1|0|2
+Kalista|칼리스타|ADC|AD|0|2|2|2|3
 Karma|카르마|SUPPORT,MID|AP|0|1|0|3|1
 Karthus|카서스|JUNGLE,MID|AP|0|0|0|0|0
 Kassadin|카사딘|MID|AP|1|0|1|0|3
@@ -54,22 +71,35 @@ Kayn|케인|JUNGLE|AD|1|1|2|0|3
 Kennen|케넨|TOP,MID|AP|0|3|3|0|1
 Khazix|카직스|JUNGLE|AD|0|1|1|0|3
 Kindred|킨드레드|JUNGLE|AD|0|0|0|1|2
+Kled|클레드|TOP|AD|2|2|3|0|2
+KogMaw|코그모|ADC|MIXED|0|0|0|0|0
+KSante|크산테|TOP|AD|3|3|2|2|2
+Leblanc|르블랑|MID|AP|0|1|1|0|3
 LeeSin|리 신|JUNGLE|AD|1|2|2|1|3
 Leona|레오나|SUPPORT|AP|3|3|3|2|1
 Lillia|릴리아|JUNGLE|AP|1|2|2|0|3
+Lissandra|리산드라|MID|AP|1|3|3|1|2
+Locke|로크|JUNGLE|AP|0|1|2|0|3
+Lucian|루시안|ADC|AD|0|0|0|0|2
 Lulu|룰루|SUPPORT|AP|0|2|0|3|0
 Lux|럭스|MID,SUPPORT|AP|0|2|0|1|0
 Malphite|말파이트|TOP|AP|3|3|3|1|0
+Malzahar|말자하|MID|AP|0|3|1|0|0
 Maokai|마오카이|TOP,JUNGLE,SUPPORT|AP|3|3|3|2|1
 MasterYi|마스터 이|JUNGLE|AD|0|0|1|0|3
+Mel|멜|MID,SUPPORT|AP|0|2|0|2|1
 Milio|밀리오|SUPPORT|AP|0|1|0|3|0
 MissFortune|미스 포츈|ADC|AD|0|1|0|0|0
+MonkeyKing|오공|JUNGLE,TOP|AD|2|3|3|0|2
 Mordekaiser|모데카이저|TOP|AP|2|1|1|0|0
 Morgana|모르가나|SUPPORT,MID,JUNGLE|AP|0|2|0|3|0
-MonkeyKing|오공|JUNGLE,TOP|AD|2|3|3|0|2
+Naafiri|나피리|MID,JUNGLE|AD|0|0|2|0|3
 Nami|나미|SUPPORT|AP|0|3|1|3|0
+Nasus|나서스|TOP|AD|3|0|1|0|0
 Nautilus|노틸러스|SUPPORT,JUNGLE|AP|3|3|3|1|1
+Neeko|니코|MID,SUPPORT|AP|0|3|3|1|1
 Nidalee|니달리|JUNGLE|AP|0|0|0|1|3
+Nilah|닐라|ADC|AD|1|2|2|1|2
 Nocturne|녹턴|JUNGLE|AD|1|1|3|0|2
 Nunu|누누와 윌럼프|JUNGLE|AP|3|3|3|1|2
 Olaf|올라프|JUNGLE,TOP|AD|2|0|2|0|2
@@ -79,21 +109,26 @@ Pantheon|판테온|JUNGLE,MID,TOP,SUPPORT|AD|1|2|2|0|2
 Poppy|뽀삐|JUNGLE,TOP,SUPPORT|AD|3|3|2|3|1
 Pyke|파이크|SUPPORT|AD|0|2|3|0|3
 Qiyana|키아나|MID,JUNGLE|AD|0|2|2|0|3
+Quinn|퀸|TOP|AD|0|1|1|0|3
 Rakan|라칸|SUPPORT|AP|1|3|3|3|3
 Rammus|람머스|JUNGLE|AP|3|3|3|1|2
 RekSai|렉사이|JUNGLE|AD|2|2|3|0|2
 Rell|렐|SUPPORT,JUNGLE|AP|3|3|3|2|1
+Renata|레나타 글라스크|SUPPORT|AP|0|3|1|3|0
 Renekton|레넥톤|TOP|AD|2|1|2|0|2
 Rengar|렝가|JUNGLE,TOP|AD|1|1|1|0|3
 Riven|리븐|TOP|AD|1|2|2|0|3
 Rumble|럼블|TOP,JUNGLE|AP|1|1|2|0|0
 Ryze|라이즈|MID,TOP|AP|1|1|0|0|1
+Samira|사미라|ADC|AD|0|0|2|0|3
 Sejuani|세주아니|JUNGLE|AP|3|3|3|2|2
 Senna|세나|SUPPORT,ADC|AD|0|2|0|2|0
 Seraphine|세라핀|SUPPORT,MID,ADC|AP|0|3|1|3|0
+Sett|세트|TOP|AD|3|2|2|1|0
 Shaco|샤코|JUNGLE|MIXED|0|1|1|0|3
 Shen|쉔|TOP,SUPPORT|AP|3|2|2|3|1
 Shyvana|쉬바나|JUNGLE|MIXED|2|1|2|0|2
+Singed|신지드|TOP|AP|3|2|2|1|2
 Sion|사이온|TOP|AD|3|3|3|0|0
 Sivir|시비르|ADC|AD|0|0|0|1|1
 Skarner|스카너|JUNGLE,TOP|AD|3|3|3|1|1
@@ -128,11 +163,14 @@ Vladimir|블라디미르|MID,TOP|AP|1|0|0|0|2
 Volibear|볼리베어|JUNGLE,TOP|MIXED|3|2|2|0|2
 Warwick|워윅|JUNGLE,TOP|MIXED|2|2|2|0|2
 Xayah|자야|ADC|AD|0|1|0|0|1
+Xerath|제라스|MID,SUPPORT|AP|0|2|0|0|0
 XinZhao|신 짜오|JUNGLE|AD|2|2|2|0|2
 Yasuo|야스오|MID,TOP|AD|0|1|1|0|3
 Yone|요네|MID,TOP|AD|1|2|2|0|3
 Yorick|요릭|TOP|AD|2|0|1|0|0
+Yunara|유나라|ADC|AD|0|0|0|0|2
 Yuumi|유미|SUPPORT|AP|0|1|0|3|0
+Zaahen|자헨|TOP,JUNGLE|AD|2|2|2|0|2
 Zac|자크|JUNGLE,TOP|AP|3|3|3|2|2
 Zed|제드|MID|AD|0|0|1|0|3
 Zeri|제리|ADC|AD|0|0|0|0|3

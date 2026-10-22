@@ -66,7 +66,7 @@ flowchart TD
 | `app/llm.py` | OpenAI Responses API 연결 / 환각 억제 지시문 |
 | `app/mcp_server.py`, `app/mcp_client.py` | MCP Tool/Resource 및 MCP 클라이언트 |
 | `app/storage.py` | SQLite 분석 결과 저장 |
-| `data/champions.json` | 138명 수작업 분류 실험용 데이터 |
+| `data/champions.json` | Data Dragon 16.21.1 기준 전체 173명의 수작업 특성 데이터 |
 | `tests/`, `evaluate.py` | 회귀 테스트, baseline 비교 |
 
 ## API
@@ -123,7 +123,7 @@ node --test tests/test_draft_ui.cjs
 
 ## 한계 및 트레이드오프
 
-1. **실전 메타 반영 X:** 138명 챔피언 특성은 수작업 교육용 JSON입니다. Data Dragon은 이미지·정적 정보를 제공하지만 패치별 승률까지 제공하지 않습니다.
+1. **실전 메타 반영 X:** [Data Dragon 16.21.1 공식 목록](https://ddragon.leagueoflegends.com/cdn/16.21.1/data/ko_KR/champion.json)과 ID·한글 이름을 대조한 173명을 포함합니다. 포지션과 조합 특성은 수작업 교육용 분류이며, 신규 챔피언은 `data/create_roster.py`에 추가한 뒤 다시 생성해야 합니다. Data Dragon은 이미지·정적 정보를 제공하지만 패치별 승률까지 제공하지 않습니다.
 2. **정량 점수는 휴리스틱:** 절대적인 승률이나 매치업 승패 확률이 아닙니다. 실제 승률과의 상관 검증은 미진행.
 3. **API 비용·지연:** OpenAI API 사용 시 호출 비용 및 네트워크 지연 발생. 키 없음/실패 시 규칙형 설명으로 폴백.
 4. **MCP stdio 프로세스 비용:** 요청마다 subprocess를 만들기 때문에 고트래픽 배포에는 지속 연결/풀링 필요.

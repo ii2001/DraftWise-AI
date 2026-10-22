@@ -11,7 +11,7 @@ createApp({
     ];
     const styles=[{id:'balanced',label:'균형'},{id:'comfort',label:'숙련도'},{id:'team',label:'팀 조합'}];
     const selectionTypes=[{id:'allies',label:'아군 픽',max:4},{id:'enemies',label:'상대 픽',max:5},{id:'bans',label:'밴',max:10},{id:'pool',label:'내 주력',max:12}];
-    const champions=ref([]),version=ref('16.18.1');
+    const champions=ref([]),version=ref('16.21.1');
     const catalogLoading=ref(true),catalogError=ref(false);
     const role=ref('JUNGLE'),activeSide=ref('allies'),activeSlot=ref(0),query=ref(''),filterRole=ref('ALL');
     const emptyDraft=()=>({allies:[],enemies:[],bans:[],pool:['Zyra','Ekko','Zac']});

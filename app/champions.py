@@ -6,7 +6,7 @@ from typing import Any
 import httpx
 
 ROOT = Path(__file__).resolve().parent.parent
-FALLBACK_VERSION = '16.18.1'
+FALLBACK_VERSION = '16.21.1'
 
 @lru_cache
 
