@@ -4,6 +4,19 @@ from typing import Any
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 ROLES = {'TOP', 'JUNGLE', 'MID', 'ADC', 'SUPPORT'}
+ROLE_FOCUS = {
+    'TOP': '탑 · 앞라인과 군중 제어 보완',
+    'JUNGLE': '정글 · 진입과 CC를 통한 교전 개시',
+    'MID': '미드 · 피해 유형 균형과 CC 연계',
+    'ADC': '원딜 · 상대 진입에 대한 기동성과 CC 대응',
+    'SUPPORT': '서포터 · 아군 딜러 보호와 교전 개시',
+}
+
+
+class DraftSlots(BaseModel):
+    allies: list[str | None] = Field(default_factory=list, max_length=4)
+    enemies: list[str | None] = Field(default_factory=list, max_length=5)
+    bans: list[str | None] = Field(default_factory=list, max_length=10)
 
 class DraftRequest(BaseModel):
     role: str = 'JUNGLE'
@@ -15,6 +28,7 @@ class DraftRequest(BaseModel):
     style: str = 'balanced'
     question: str = Field(default='', max_length=300)
     session_id: str | None = Field(default=None, max_length=80)
+    slots: DraftSlots | None = None
 
     @field_validator('role')
     @classmethod
@@ -45,7 +59,62 @@ class DraftRequest(BaseModel):
             raise ValueError('아군과 적군에 동일 챔피언을 동시에 선택할 수 없습니다.')
         if set(active).intersection(self.bans):
             raise ValueError('픽된 챔피언을 밴 목록에 넣을 수 없습니다.')
+        if self.slots:
+            for side in ('allies', 'enemies', 'bans'):
+                if [cid for cid in getattr(self.slots, side) if cid is not None] != getattr(self, side):
+                    raise ValueError('슬롯 정보와 픽·밴 목록이 일치하지 않습니다.')
         return self
+
+
+def team_summary(champs: list[dict[str, Any]]) -> dict[str, Any]:
+    ad = sum(c['damage'] == 'AD' for c in champs)
+    ap = sum(c['damage'] == 'AP' for c in champs)
+    frontline = sum(c['tank'] >= 2 for c in champs)
+    hard_cc = sum(c['cc'] >= 2 for c in champs)
+    flags = []
+    if ad >= 2 and ap == 0: flags.append('아군 물리 피해 편중')
+    if ap >= 2 and ad == 0: flags.append('아군 마법 피해 편중')
+    if champs and frontline == 0: flags.append('아군 앞라인 부족')
+    if len(champs) >= 2 and hard_cc == 0: flags.append('아군 CC 부족')
+    if not flags: flags.append('뚜렷한 조합 결함 없음 또는 입력 부족')
+    return {'ad': ad, 'ap': ap, 'frontline': frontline, 'hard_cc': hard_cc,
+            'engage': sum(c['engage'] >= 2 for c in champs),
+            'peel': sum(c['peel'] >= 2 for c in champs), 'flags': flags}
+
+
+def position_fit(role: str, c: dict, team: dict, danger: int) -> tuple[int, list[str]]:
+    score, reasons = 50, []
+    if role == 'TOP':
+        if team['frontline'] == 0 and c['tank'] >= 2:
+            score += 25; reasons.append('탑: 부족한 앞라인 담당')
+        if c['cc'] >= 2:
+            score += 15; reasons.append('탑: 한타 CC 보강')
+    elif role == 'JUNGLE':
+        if c['engage'] >= 2:
+            score += 20; reasons.append('정글: 먼저 진입해 교전 개시')
+        if c['cc'] >= 2:
+            score += 15; reasons.append('정글: CC를 활용한 갱킹 연계')
+    elif role == 'MID':
+        if team['ad'] >= 2 and team['ap'] == 0 and c['damage'] == 'AP':
+            score += 25; reasons.append('미드: 팀에 부족한 마법 피해 제공')
+        elif team['ap'] >= 2 and team['ad'] == 0 and c['damage'] == 'AD':
+            score += 25; reasons.append('미드: 팀에 부족한 물리 피해 제공')
+        if team['hard_cc'] == 0 and c['cc'] >= 2:
+            score += 15; reasons.append('미드: CC로 아군 교전 연계')
+    elif role == 'ADC':
+        if danger:
+            if c['mobility'] >= 2:
+                score += 25; reasons.append('원딜: 기동성으로 상대 진입 대응')
+            else:
+                score -= 15; reasons.append('원딜: 이동기가 부족해 아군 보호 필요')
+        if c['cc'] >= 2:
+            score += 15; reasons.append('원딜: CC를 활용한 교전 대응')
+    elif role == 'SUPPORT':
+        if c['peel'] >= 2:
+            score += 25; reasons.append('서포터: 아군 딜러 보호')
+        if team['engage'] == 0 and c['engage'] >= 2:
+            score += 20; reasons.append('서포터: 부족한 교전 개시 보완')
+    return score, reasons
 
 
 def draft_analysis(req: DraftRequest, champs: list[dict[str, Any]]) -> dict[str, Any]:
@@ -56,10 +125,9 @@ def draft_analysis(req: DraftRequest, champs: list[dict[str, Any]]) -> dict[str,
         raise ValueError(f'지원하지 않는 챔피언: {", ".join(missing)}')
     allies = [lookup[c] for c in req.allies]
     enemies = [lookup[c] for c in req.enemies]
-    ad = sum(c['damage']=='AD' for c in allies)
-    ap = sum(c['damage']=='AP' for c in allies)
-    frontline = sum(c['tank']>=2 for c in allies)
-    hard_cc = sum(c['cc']>=2 for c in allies)
+    summary = team_summary(allies)
+    ad, ap = summary['ad'], summary['ap']
+    frontline, hard_cc = summary['frontline'], summary['hard_cc']
     danger = sum(c['mobility']>=2 and c['engage']>=1 for c in enemies)
     pressure = sum(c['tank']>=2 for c in enemies)
     needs_ap = ad>=2 and ap==0
@@ -105,7 +173,9 @@ def draft_analysis(req: DraftRequest, champs: list[dict[str, Any]]) -> dict[str,
             elif c['cc']==0: team-=7
         if 'Yasuo' in req.allies and c['engage']>=2 and c['cc']>=2:
             team+=10;reasons.append('야스오와 연계 가능한 진입/CC')
-        team=max(0,min(100,team))
+        role_score, role_reasons = position_fit(req.role, c, summary, danger)
+        team = .8 * max(0, min(100, team)) + .2 * role_score
+        reasons = role_reasons + reasons
         vs=50.0
         if danger>0 and (c['tank']>=2 or c['peel']>=2):
             vs+=min(22, danger*9);reasons.append('상대 진입에 대비한 생존/보호')
@@ -119,15 +189,9 @@ def draft_analysis(req: DraftRequest, champs: list[dict[str, Any]]) -> dict[str,
         if not reasons: reasons.append('현재 선택 정보에서 큰 조합 결함이 없음')
         candidates.append({'id':c['id'], 'name':c['name'], 'role':req.role,
             'damage':c['damage'],'score':total,
-            'breakdown':{'comfort':round(comfort), 'team':round(team), 'enemy':round(vs)},
-            'reasons':reasons[:4]})
+            'breakdown':{'comfort':round(comfort), 'team':round(team), 'enemy':round(vs), 'position':role_score},
+            'reasons':reasons[:4], 'composition_after':team_summary(allies + [c])})
     candidates.sort(key=lambda x:(-x['score'],x['name']))
-    flags=[]
-    if needs_ap:flags.append('아군 물리 피해 편중')
-    if needs_ad:flags.append('아군 마법 피해 편중')
-    if needs_frontline:flags.append('아군 앞라인 부족')
-    if needs_cc:flags.append('아군 CC 부족')
-    if not flags: flags.append('뚜렷한 조합 결함 없음 또는 입력 부족')
     bans=[]
     # Explainable ban candidate criteria: opponents' high engage/CC, not real ban rate.
     for c in champs:
@@ -140,7 +204,7 @@ def draft_analysis(req: DraftRequest, champs: list[dict[str, Any]]) -> dict[str,
     bans.sort(key=lambda p:(-p[0],p[1]['id']))
     return {'recommendations':candidates[:5],
             'bans':[{'id':c['id'],'name':c['name'],'reason':'진입·군중 제어 또는 조합 압박 위험(교육용 규칙 평가)'} for _,c in bans[:3]],
-            'team':{'ad':ad,'ap':ap,'frontline':frontline,'hard_cc':hard_cc,'flags':flags},
+            'team':summary, 'role_focus':ROLE_FOCUS[req.role],
             'weights':{'comfort':pw,'team':tw,'enemy':ew},
             'considered':len(candidates),'data_quality':'curated_demo'}
 

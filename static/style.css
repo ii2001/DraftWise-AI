@@ -11,3 +11,51 @@
 @media(max-width:900px){.navbar{height:64px;padding:0 24px}.nav-title{display:none}.draft-arena{grid-template-columns:1fr 1fr;gap:20px}.champion-panel{grid-column:1/-1;grid-row:2}.team-slots{grid-template-columns:1fr;gap:7px;margin-top:15px}.pick-slot,.own-slot{height:76px}.team-foot{margin-top:12px}.ban-slots{max-width:260px}.ban-cell{max-height:44px}.slot-select{padding:10px 14px;gap:14px}.champ-roster{grid-template-columns:repeat(9,minmax(0,1fr));height:355px;padding:0 20px 15px}.roster-toolbar{padding:16px 20px}.champ-search{max-width:230px}.roster-roles{gap:10px}.draft-controls{flex-wrap:wrap;gap:18px}.analyze-button{flex:1;min-width:200px}.priority-control{flex:1}.pool-only{flex:1}.team-heading{padding-bottom:10px}.selection-header{padding-top:16px}.draft-heading{padding:24px 0}.red-team{grid-column:2;grid-row:1}}
 @media(max-width:580px){.container{padding:0 14px}.navbar{padding:0 16px}.brand{font-size:16px;gap:8px}.brand-emblem{font-size:27px}.header-right{gap:12px;font-size:10px}.patch{display:none}h1{font-size:21px}.draft-heading p{font-size:10px}.draft-arena{gap:14px 10px}.team-heading h2{font-size:14px}.team-heading>span{font-size:7px;letter-spacing:.8px}.ban-slots{gap:5px}.ban-heading{font-size:9px;margin-top:12px}.ban-cell>button:first-child{font-size:18px}.clear-ban{width:16px;height:16px;font-size:10px}.team-slots{gap:6px}.pick-slot,.own-slot{height:71px}.slot-select{gap:6px;padding:8px}.slot-icon{height:26px;width:26px;font-size:17px;margin:0 5px}.slot-icon:has(img){height:35px;width:35px;margin:0}.slot-copy{gap:4px}.slot-copy strong{font-size:10px}.slot-copy small,.slot-copy>span{font-size:8px}.slot-number{font-size:8px;right:5px;bottom:5px}.own-slot{gap:6px}.own-slot .slot-icon{margin:0 5px 0 10px;font-size:18px}.own-slot strong{font-size:10px}.own-slot small{font-size:8px}.slot-eyebrow{font-size:7px;letter-spacing:.5px}.you-badge{font-size:7px;right:5px;top:5px;padding:0 3px}.team-foot{font-size:8px;line-height:1.7;min-height:28px}.selection-header{padding:15px}.selection-context>span{font-size:9px}.selection-context h2{font-size:17px}.selection-tabs{padding:0 10px;gap:3px}.selection-tabs button{font-size:10px;gap:6px}.roster-toolbar{padding:13px 12px;gap:10px}.roster-roles{gap:2px}.roster-roles button{width:25px}.roster-roles button:first-child{width:27px}.champ-search{flex:1;max-width:160px;padding:0 6px}.champ-roster{grid-template-columns:repeat(6,minmax(0,1fr));height:340px;padding:0 12px 12px;gap:13px 8px}.champ-label{font-size:9px}.roster-bottom{padding:12px}.draft-controls{margin-top:16px;padding:15px;gap:15px}.my-role{min-width:75px}.priority-control{padding-left:12px}.setting-pills{gap:2px}.setting-pills button{padding:7px 6px;font-size:9px;white-space:nowrap}.pool-only{font-size:10px;flex-basis:100%}.analyze-button{flex-basis:100%;padding:12px 20px}.insights-heading h2{font-size:18px}.analysis-status{font-size:9px}.analysis-empty{padding:20px 15px;gap:12px;flex-wrap:wrap}.analysis-empty>div{flex:1}.analysis-empty>button{margin-left:47px}.analysis-emblem{font-size:32px}.analysis-empty h3{font-size:11px;line-height:1.7}.analysis-empty p{font-size:10px}.recs{grid-template-columns:1fr}.rec-card{padding:16px}.rec-card p{min-height:0}.rec-top img{width:50px;height:50px}.rec-top h4{font-size:16px}.rec-score b{font-size:28px}.rec-rank{margin-bottom:10px}footer{display:block;font-size:8px}footer p{text-align:left;margin-top:9px}.toast{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+.position-bar{display:flex;align-items:center;gap:24px;padding:16px 20px;margin-bottom:24px;border:1px solid #3e4b4d;background:#10212b90}
+.position-label h2{font-size:13px;font-weight:500;margin:0 0 6px;color:#e4c997}
+.position-label small{font-size:9px;color:#8b9da3}
+.position-buttons{display:flex;gap:7px;flex:1}
+.position-buttons button{display:flex;align-items:center;justify-content:center;gap:8px;min-width:75px;min-height:43px;padding:8px 13px;border:1px solid #344851;background:#0a1821;color:#9cb0b9;font-size:11px}
+.position-buttons button>span{font-size:21px;color:#81a6b6}
+.position-buttons button.active{color:#ead4a6;border-color:#bda26e;background:#a68c451a}
+.position-buttons button.active>span{color:#d9bc80}
+.history-toggle{border:1px solid #6e634b;padding:11px 14px;background:#292a2240;color:#d5bb87;font-size:11px;min-height:43px;white-space:nowrap}
+.storage-note,.restored-note{font-size:11px;line-height:1.8;color:#ddbd87;border-left:2px solid #9e8554;padding:8px 12px;margin:10px 0 15px;background:#3b302426}
+.current-role{display:grid;gap:9px;min-width:100px}
+.current-role strong{font-size:15px;font-weight:500;color:#ead4a6}
+.pool-only small{color:#9aafac;font-size:10px}
+.own-slot .slot-icon>span{transform:none}
+.own-slot.has-pick{background:linear-gradient(110deg,#51412477,#12232c);border-color:#c6aa71}
+.own-slot.has-pick .slot-icon{overflow:hidden}
+.own-slot.has-pick img{width:100%;height:100%;object-fit:cover}
+.role-focus{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:12px;color:#d8bf8c;padding:12px 15px;border:1px solid #5f553c;background:#282b2233;margin:0 0 20px}
+.role-focus small{font-size:10px;color:#8faaa9}
+.compare-pick{width:100%;margin-top:17px;min-height:38px;padding:9px;border:1px solid #80704d;color:#e0c892;background:#39312255;font-size:10px}
+.compare-pick[aria-pressed=true]{background:#c6aa71;color:#10212b}
+.legacy-comparison{font-size:9px;color:#97a8aa;line-height:1.6;display:block;margin-top:8px}
+.composition-comparison{border:1px solid #706348;background:linear-gradient(120deg,#262a2240,#10232b70);padding:22px;margin-top:24px}
+.composition-comparison>p{font-size:11px;line-height:1.8;color:#9eb0b6;margin:0 0 18px}
+.comparison-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.comparison-grid>div{display:grid;gap:9px;padding:15px 10px;text-align:center;background:#081820;border:1px solid #30434a}
+.comparison-grid>div>span{font-size:10px;color:#97adb5}
+.comparison-grid strong{font-size:21px;color:#e6c994;font-weight:500}
+.comparison-grid strong span{font-size:14px;color:#65858f;margin:0 5px}
+.comparison-grid small{font-size:10px;color:#8dd4c1}
+.comparison-flags{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.comparison-flags h4{margin:0 0 10px;font-size:11px;font-weight:500;color:#9fb3b8}
+.comparison-flags>div>span{display:inline-block;border:1px solid #63543d;color:#d2b88a;padding:5px 8px;font-size:10px;margin:0 6px 6px 0;line-height:1.6}
+.comparison-flags>div:last-child>span{border-color:#436356;color:#96d0bc}
+.history-panel{border:1px solid #344851;padding:22px;background:#0c1b24;margin:10px 0 24px}
+.history-panel h2{font-size:16px;margin:0;font-weight:500}
+.history-panel>p{font-size:11px;color:#9bb0b7;line-height:1.8}
+.history-list{display:grid;gap:8px;margin-top:15px;max-height:440px;overflow:auto;scrollbar-width:thin;scrollbar-color:#425a64 #0a1820}
+.history-item{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px;border:1px solid #30434a;background:#0d202b}
+.history-item>div{display:flex;align-items:center;flex-wrap:wrap;gap:8px 15px}
+.history-role{font-size:11px;color:#e0c38c;border:1px solid #726448;padding:4px 7px}
+.history-item time{font-size:10px;color:#8ea7b0}
+.history-item strong{font-size:12px;font-weight:500;color:#d6e3e3}
+.history-item small{font-size:10px;color:#89a0aa}
+.history-item>button{flex:none;background:transparent;border:1px solid #776546;color:#d9c18e;padding:9px 12px;min-height:38px;font-size:10px}
+@media(max-width:1100px){.position-bar{flex-wrap:wrap;gap:14px}.position-buttons button{min-width:65px}.position-label{min-width:130px}.history-toggle{margin-left:auto}.comparison-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:580px){.position-bar{padding:14px;gap:12px;margin-bottom:18px}.position-label{flex:1}.history-toggle{font-size:10px;padding:9px}.position-buttons{order:3;flex-basis:100%;gap:5px}.position-buttons button{flex:1;min-width:0;flex-direction:column;gap:5px;padding:9px 3px;font-size:10px}.position-buttons button>span{font-size:20px}.current-role{min-width:75px}.role-focus{font-size:11px}.composition-comparison{padding:15px}.comparison-grid{gap:7px}.comparison-grid>div{padding:12px 5px}.comparison-grid strong{font-size:18px}.comparison-flags{grid-template-columns:1fr;gap:10px}.history-panel{padding:15px}.history-item{align-items:flex-start;flex-direction:column;gap:12px;padding:12px}.history-item>button{align-self:flex-end}.history-item>div{gap:8px 12px}.storage-note,.restored-note{font-size:10px}.history-list{max-height:500px}}
