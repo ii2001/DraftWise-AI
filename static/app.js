@@ -175,3 +175,4 @@ createApp({
     return {roles,styles,selectionTypes,comparisonMetrics,champions,version,catalogLoading,catalogError,role,activeSide,activeSlot,query,filterRole,draft,style,poolOnly,question,loading,result,selectedPick,storageAvailable,toast,historyOpen,historyLoading,historyError,historyItems,restoredAt,filteredChampions,name,roleName,formatDate,imageUrl,splashUrl,useFallback,allyIndex,isUnavailable,selectSlot,selectSide,pick,remove,resetDraft,loadPreset,selectRecommended,clearComparison,analyze,loadCatalog,toggleHistory,loadHistory,restoreHistory};
   }
 }).mount('#app');
+document.getElementById('boot-status')?.remove();

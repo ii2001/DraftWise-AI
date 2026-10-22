@@ -51,3 +51,34 @@ def test_history_restores_sparse_slots_settings_and_comparison(monkeypatch,tmp_p
         assert client.get('/api/history/not-this-session').json()['items']==[]
         payload['slots']['allies']=['Ahri']
         assert client.post('/api/analyze',json=payload).status_code==422
+
+
+def test_page_serves_local_vue_and_versioned_assets():
+    from hashlib import sha256
+    from html.parser import HTMLParser
+    from app.main import ROOT
+
+    class Assets(HTMLParser):
+        urls=[]
+        def handle_starttag(self,tag,attrs):
+            attrs=dict(attrs)
+            if tag=='script': self.urls.append(attrs['src'])
+            if tag=='link' and attrs.get('rel')=='stylesheet': self.urls.append(attrs['href'])
+
+    with TestClient(app) as client:
+        response=client.get('/')
+        assert response.status_code==200
+        assert response.headers['cache-control']=='no-store'
+        assert 'id="boot-status"' in response.text
+        assets=Assets()
+        assets.feed(response.text)
+        assert '/static/vendor/vue-3.5.44.global.prod.js' in assets.urls
+        assert not any('jsdelivr' in url for url in assets.urls)
+        for filename in ('app.js','style.css'):
+            version=sha256((ROOT/'static'/filename).read_bytes()).hexdigest()[:12]
+            url=f'/static/{filename}?v={version}'
+            assert url in assets.urls
+            assert client.get(url).status_code==200
+        vue=client.get('/static/vendor/vue-3.5.44.global.prod.js')
+        assert vue.status_code==200
+        assert 'vue v3.5.44' in vue.text[:200]

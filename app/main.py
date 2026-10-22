@@ -1,10 +1,11 @@
 import os
 import time
+from hashlib import sha256
 from contextlib import asynccontextmanager
 from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI,HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from .agent import run_agent
 from .scoring import DraftRequest
@@ -24,7 +25,11 @@ app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')
 
 @app.get('/')
 async def index():
-    return FileResponse(ROOT/'static/index.html')
+    html=(ROOT/'static/index.html').read_text(encoding='utf-8')
+    for asset in ('style.css','app.js'):
+        version=sha256((ROOT/'static'/asset).read_bytes()).hexdigest()[:12]
+        html=html.replace(f'/static/{asset}',f'/static/{asset}?v={version}')
+    return HTMLResponse(html,headers={'Cache-Control':'no-store'})
 
 @app.get('/api/health')
 def health():

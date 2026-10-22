@@ -11,6 +11,13 @@
   <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
+<section id="boot-status" class="boot-status" role="status">
+  <h1>DraftWise AI</h1>
+  <p>화면을 준비하고 있습니다.</p>
+  <p>계속 이 안내가 보이면 화면 파일을 불러오지 못한 상태입니다.</p>
+  <a href="/">다시 불러오기</a>
+</section>
+<noscript><p>밴픽 화면을 사용하려면 브라우저에서 JavaScript를 허용해 주세요.</p></noscript>
 <div id="app" v-cloak>
   <header class="navbar">
     <a class="brand" href="/" aria-label="DraftWise AI 홈"><span class="brand-emblem">✦</span><span>DRAFT<span class="gold">WISE</span><small>AI</small></span></a>
@@ -110,7 +117,7 @@
   </main>
   <div v-if="toast" class="toast" role="status">{{toast}}</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="/static/vendor/vue-3.5.44.global.prod.js"></script>
 <script src="/static/app.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ function setup(stored={},storageBlocked=false){
   runInNewContext(readFileSync(join(__dirname,'../static/app.js'),'utf8'),{
     Vue:{ref:value=>({value}),computed:fn=>({get value(){return fn();}}),watch:()=>{},onMounted:()=>{},createApp:options=>({mount:()=>{app=options.setup();}})},
     setTimeout:()=>{},requestAnimationFrame:()=>{},
+    document:{getElementById:()=>null},
     localStorage:{getItem:key=>{if(storageBlocked)throw Error('disabled');return storage.get(key)||null;},setItem:(key,value)=>{if(storageBlocked)throw Error('disabled');storage.set(key,value);}},
     fetch:async(url,options)=>{calls.push(url);if(options)payload=JSON.parse(options.body);return {ok:true,json:async()=>({recommendations:[],items:[]})};}
   });
